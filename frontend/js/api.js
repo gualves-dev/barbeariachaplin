@@ -4,7 +4,7 @@ async function inicializarPainelCliente() {
     const filaContainer = document.getElementById("fila");
 
 
-    const statusResponse = await fetch("http://localhost:8080/api/status");
+    const statusResponse = await fetch("https://barbearia-chaplinofc-production.up.railway.app/api/status");
     const isAbeto = await statusResponse.json();
     const statusH5 = document.querySelector(".BarberInfoBox h5");
     const bordaBarbearia = document.querySelector(".BarberInfoBox");
@@ -28,7 +28,7 @@ async function inicializarPainelCliente() {
 
 
 
-    fetch("http://localhost:8080/api/profissionais")
+    fetch("https://barbearia-chaplinofc-production.up.railway.app/api/profissionais")
         .then(res => res.json())
         .then(lista => {
 
@@ -93,7 +93,7 @@ async function inicializarPainelCliente() {
 
     try {
         // 1. Busca todos os clientes no seu Java
-        const response = await fetch("http://localhost:8080/api/clientes");
+        const response = await fetch("https://barbearia-chaplinofc-production.up.railway.app/api/clientes");
         const clientes = await response.json();
 
         // 2. Limpa a mensagem de "Nenhuma pessoa na fila"
@@ -208,7 +208,7 @@ document.getElementById("formAgendamento").addEventListener("submit", async (e) 
     console.log(cliente);
 
    try {
-        const res = await fetch("http://localhost:8080/api/clientes/entrar", {
+        const res = await fetch("https://barbearia-chaplinofc-production.up.railway.app/api/clientes/entrar", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(cliente)
@@ -238,7 +238,7 @@ document.getElementById("formAgendamento").addEventListener("submit", async (e) 
 
 async function atualizarDashboardGeral() {
     try {
-        const response = await fetch(`http://localhost:8080/api/clientes`);
+        const response = await fetch(`https://barbearia-chaplinofc-production.up.railway.app/api/clientes`);
         const clientes = await response.json();
 
         const status = {

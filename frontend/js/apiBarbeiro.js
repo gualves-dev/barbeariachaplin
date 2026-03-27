@@ -1,4 +1,4 @@
-const URL_BASE = "http://localhost:8080";
+const URL_BASE = "https://barbearia-chaplinofc-production.up.railway.app";
 
 
 let ID_PROFISSIONAL_LOGADO = 0;
@@ -39,7 +39,7 @@ btnIndisponivel.addEventListener('click', async () => {
 
     try {
 
-        const res = await fetch(`http://localhost:8080/api/profissionais/${ID_PROFISSIONAL_LOGADO}/indisponivel`, {
+        const res = await fetch(`https://barbearia-chaplinofc-production.up.railway.app/api/profissionais/${ID_PROFISSIONAL_LOGADO}/indisponivel`, {
             method: "PUT"
         });
 
@@ -65,7 +65,7 @@ btnDisponivel.addEventListener('click', async () => {
 
     try {
 
-        const res = await fetch(`http://localhost:8080/api/profissionais/${ID_PROFISSIONAL_LOGADO}/disponivel`, {
+        const res = await fetch(`https://barbearia-chaplinofc-production.up.railway.app/api/profissionais/${ID_PROFISSIONAL_LOGADO}/disponivel`, {
             method: "PUT"
         });
 
@@ -95,7 +95,7 @@ fecharBarbearia.addEventListener('click', async () => {
 
     try {
 
-        const res = await fetch(`http://localhost:8080/api/status/fechar`, {
+        const res = await fetch(`https://barbearia-chaplinofc-production.up.railway.app/api/status/fechar`, {
             method: "POST"
         });
 
@@ -127,7 +127,7 @@ abrirBarbearia.addEventListener('click', async () => {
 
     try {
 
-        const res = await fetch(`http://localhost:8080/api/status/abrir`, {
+        const res = await fetch(`https://barbearia-chaplinofc-production.up.railway.app/api/status/abrir`, {
             method: "POST"
         });
 
@@ -269,7 +269,7 @@ const btnDisponivel1 = document.querySelector(".MudarStatusProfissionalDisponive
 console.log(btnIndisponível1);
 console.log(btnDisponivel1);
 
-fetch("http://localhost:8080/api/profissionais")
+fetch("https://barbearia-chaplinofc-production.up.railway.app/api/profissionais")
     .then(res => res.json())
     .then(lista => {
 
@@ -307,7 +307,7 @@ fetch("http://localhost:8080/api/profissionais")
 
 async function fecharBarbeariaParaGabrielLoadding() {
 
-    const statusResponseGariel = await fetch("http://localhost:8080/api/status");
+    const statusResponseGariel = await fetch("https://barbearia-chaplinofc-production.up.railway.app/api/status");
     const isAbeto = await statusResponseGariel.json();
     const bordaBarbearia = document.querySelector(".BarbeariaStatusMainBox");
 

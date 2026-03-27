@@ -1,4 +1,4 @@
-const URL_BASE = "http://localhost:8080";
+const URL_BASE = "https://barbearia-chaplinofc-production.up.railway.app";
 
 
 let ID_PROFISSIONAL_LOGADO = 0;
@@ -39,7 +39,7 @@ btnIndisponivel.addEventListener('click', async () => {
 
     try {
 
-        const res = await fetch(`http://localhost:8080/api/profissionais/${ID_PROFISSIONAL_LOGADO}/indisponivel`, {
+        const res = await fetch(`https://barbearia-chaplinofc-production.up.railway.app/api/profissionais/${ID_PROFISSIONAL_LOGADO}/indisponivel`, {
             method: "PUT"
         });
 
@@ -65,7 +65,7 @@ btnDisponivel.addEventListener('click', async () => {
 
     try {
 
-        const res = await fetch(`http://localhost:8080/api/profissionais/${ID_PROFISSIONAL_LOGADO}/disponivel`, {
+        const res = await fetch(`https://barbearia-chaplinofc-production.up.railway.app/api/profissionais/${ID_PROFISSIONAL_LOGADO}/disponivel`, {
             method: "PUT"
         });
 
@@ -198,7 +198,7 @@ const boxes = {
     guilherme: document.querySelector("#guilhermeBox2")
 };
 
-fetch("http://localhost:8080/api/profissionais")
+fetch("https://barbearia-chaplinofc-production.up.railway.app/api/profissionais")
     .then(res => res.json())
     .then(lista => {
 
