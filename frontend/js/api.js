@@ -214,7 +214,7 @@ document.getElementById("formAgendamento").addEventListener("submit", async (e) 
             body: JSON.stringify(cliente)
         });
 
-        if (!res.ok) throw new Error("Erro ao salvar no banco");
+        if (!res.ok) throw new Error("Barbeiro Indisponivel");
 
         alert("✅ Agendamento feito com sucesso!");
 
