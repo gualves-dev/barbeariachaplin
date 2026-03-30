@@ -231,6 +231,7 @@ document.getElementById("formAgendamento").addEventListener("submit", async (e) 
         console.error("Erro no agendamento:", err);
         alert("Barbeiro Indisponivel.");
     }
+    atualizarDashboardGeral();
 });
 
 
@@ -322,6 +323,7 @@ btnAtualizar.addEventListener('click', async () => {
     
     // Chama a função que você já tem para buscar o status
     await inicializarPainelCliente();
+    await atualizarDashboardGeral();
     console.log("Funcionou");
     
     // Volta o texto original depois de 1 segundo
@@ -337,4 +339,5 @@ window.onload = () => {
         document.body.classList.add('tema-glass');
     }
     inicializarPainelCliente(); // Carrega o status inicial
+    atualizarDashboardGeral();
 };
