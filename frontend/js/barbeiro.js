@@ -191,6 +191,6 @@ document.addEventListener("visibilitychange", () => {
     } else {
         console.log("Página visível novamente: Atualizando dados...");
         // Quando o usuário volta para a aba, o site atualiza a fila sozinho uma única vez
-        inicializarPainelCliente();
-    }
-});
+        renderizarFila();
+
+}});

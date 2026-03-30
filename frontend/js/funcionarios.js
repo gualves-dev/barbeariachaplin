@@ -115,7 +115,7 @@ async function atualizarFila() {
             filtrados.forEach(cliente => {
                 // --- AJUSTE AQUI: Verifica o status do banco ---
                 const estaAtendendo = cliente.status === "EM_ATENDIMENTO";
-                
+
                 // Adiciona uma classe extra se estiver atendendo para a borda branca
                 const classeCard = estaAtendendo ? "ClienteCardBox AtendendoAgora" : "ClienteCardBox";
                 const hiddenAtender = estaAtendendo ? "Hidden" : "";
@@ -179,6 +179,7 @@ document.addEventListener('click', async (event) => {
             }
         } catch (e) { console.error(e); }
     }
+    aplicarStatusFinal();
 });
 
 // Início
@@ -189,50 +190,58 @@ document.addEventListener('click', async (event) => {
 
 
 
+function aplicarStatusFinal() {
 
-const boxes = {
-    gabriel: document.querySelector("#gabrielBox2"),
-    pedro: document.querySelector("#pedrobox2"),
-    ramon: document.querySelector("#ramonBox2"),
-    guilherme: document.querySelector("#guilhermeBox2")
-};
+    const boxes = {
+        gabriel: document.querySelector("#gabrielBox2"),
+        pedro: document.querySelector("#pedrobox2"),
+        ramon: document.querySelector("#ramonBox2"),
+        guilherme: document.querySelector("#guilhermeBox2")
+    };
 
-fetch("https://barbearia-chaplinofc-production.up.railway.app/api/profissionais")
-    .then(res => res.json())
-    .then(lista => {
+    fetch("https://barbearia-chaplinofc-production.up.railway.app/api/profissionais")
+        .then(res => res.json())
+        .then(lista => {
 
-        lista.forEach(p => {
+            lista.forEach(p => {
 
-            const nome = (p.nome || "").toLowerCase().trim();
-            const box = boxes[nome];
+                const nome = (p.nome || "").toLowerCase().trim();
+                const box = boxes[nome];
 
-            console.log("Nome:", nome, "Status:", p.status, "Box:", box);
+                console.log("Nome:", nome, "Status:", p.status, "Box:", box);
 
-            aplicarStatus(box, p.status);
+                aplicarStatus(box, p.status);
+            });
+
+        })
+        .catch(err => {
+            console.error("Erro ao buscar profissionais:", err);
         });
 
-    })
-    .catch(err => {
-        console.error("Erro ao buscar profissionais:", err);
-    });
 
+    // 🔥 FUNÇÃO ÚNICA
+    function aplicarStatus(box, status) {
+        if (!box) return;
 
-// 🔥 FUNÇÃO ÚNICA
-function aplicarStatus(box, status) {
-    if (!box) return;
-
-    if (status === "INDISPONIVEL") {
-        btnDisponivel.classList.remove("Hidden");
-        btnIndisponivel.classList.add("Hidden");
-        box.style.border = "1px solid red";
-    } else if (status === "DISPONIVEL") {
-        btnIndisponivel.classList.remove("Hidden");
-        btnDisponivel.classList.add("Hidden");
-        box.style.border = "1px solid black";
-    } else if (status === "ATENDENDO") {
-        box.style.border = "1px solid white";
+        if (status === "INDISPONIVEL") {
+            btnDisponivel.classList.remove("Hidden");
+            btnIndisponivel.classList.add("Hidden");
+            box.style.border = "1px solid red";
+        } else if (status === "DISPONIVEL") {
+            btnIndisponivel.classList.remove("Hidden");
+            btnDisponivel.classList.add("Hidden");
+            box.style.border = "1px solid black";
+        } else if (status === "ATENDENDO") {
+            box.style.border = "1px solid white";
+        }
     }
+
+
+
+
+
 }
+
 
 
 
@@ -248,7 +257,7 @@ const btnAtualizar = document.getElementById('btn-atualizar');
 btnTema.addEventListener('click', () => {
     // Alterna a classe 'tema-glass' no body
     document.body.classList.toggle('tema-glass');
-    
+
     // Salva a escolha para não resetar quando der F5
     const modoGlass = document.body.classList.contains('tema-glass');
     localStorage.setItem('preferencia-fundo', modoGlass ? 'glass' : 'escuro');
@@ -258,11 +267,11 @@ btnTema.addEventListener('click', () => {
 btnAtualizar.addEventListener('click', async () => {
     // Feedback visual de carregando
     btnAtualizar.innerText = "⏳...";
-    
+
     // Chama a função que você já tem para buscar o status
     await atualizarFila();
     console.log("Funcionou");
-    
+
     // Volta o texto original depois de 1 segundo
     setTimeout(() => {
         btnAtualizar.innerHTML = "🔄 <span class='texto-botao'>Atualizar Fila</span>";

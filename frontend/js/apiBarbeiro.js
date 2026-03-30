@@ -217,6 +217,56 @@ async function atualizarFila() {
     } catch (erro) {
         console.error("Erro na API:", erro);
     }
+
+
+
+    const gabrielBox2 = document.querySelector("#gabrielBox2");
+
+    const btnIndisponível1 = document.querySelector(".MudarStatusProfissional");
+    const btnDisponivel1 = document.querySelector(".MudarStatusProfissionalDisponivel")
+
+    console.log(btnIndisponível1);
+    console.log(btnDisponivel1);
+
+    fetch("https://barbearia-chaplinofc-production.up.railway.app/api/profissionais")
+        .then(res => res.json())
+        .then(lista => {
+
+            lista.forEach(p => {
+
+                if (p.nome === "Gabriel") {
+
+                    console.log(p.nome + " - " + p.status);
+
+                    // 🔥 LIMPA ESTADO
+
+                    // 🔴 INDISPONÍVEL
+                    if (p.status === "INDISPONIVEL") {
+                        gabrielBox2.style.border = "1px solid red";
+                        btnIndisponível1.classList.add("Hidden"); // mostra botão
+                        btnDisponivel1.classList.remove("Hidden")
+
+                        // ⚫ DISPONÍVEL
+                    } else if (p.status === "DISPONIVEL") {
+                        gabrielBox2.style.border = "1px solid black";
+
+                        // ⚪ ATENDENDO
+                    } else if (p.status === "ATENDENDO") {
+                        gabrielBox2.style.border = "1px solid white";
+                    }
+
+                }
+
+            });
+            fecharBarbeariaParaGabrielLoadding();
+
+        });
+
+
+
+
+
+
 }
 
 // ESCUTADOR DE CLIQUES (Delegação de Eventos)
@@ -257,50 +307,6 @@ document.addEventListener('click', async (event) => {
 
 
 
-const gabrielBox2 = document.querySelector("#gabrielBox2");
-const pedroBox2 = document.querySelector("#pedrobox");
-const ramonBox2 = document.querySelector("#ramonBox");
-const guilhermeBox2 = document.querySelector("#guilhermeBoxFila");
-
-const btnIndisponível1 = document.querySelector(".MudarStatusProfissional");
-const btnDisponivel1 = document.querySelector(".MudarStatusProfissionalDisponivel")
-
-console.log(btnIndisponível1);
-console.log(btnDisponivel1);
-
-fetch("https://barbearia-chaplinofc-production.up.railway.app/api/profissionais")
-    .then(res => res.json())
-    .then(lista => {
-
-        lista.forEach(p => {
-
-            if (p.nome === "Gabriel") {
-
-                console.log(p.nome + " - " + p.status);
-
-                // 🔥 LIMPA ESTADO
-
-                // 🔴 INDISPONÍVEL
-                if (p.status === "INDISPONIVEL") {
-                    gabrielBox2.style.border = "1px solid red";
-                    btnIndisponível1.classList.add("Hidden"); // mostra botão
-                    btnDisponivel1.classList.remove("Hidden")
-
-                    // ⚫ DISPONÍVEL
-                } else if (p.status === "DISPONIVEL") {
-                    gabrielBox2.style.border = "1px solid black";
-
-                    // ⚪ ATENDENDO
-                } else if (p.status === "ATENDENDO") {
-                    gabrielBox2.style.border = "1px solid white";
-                }
-
-            }
-
-        });
-        fecharBarbeariaParaGabrielLoadding();
-
-    });
 
 
 
@@ -345,7 +351,7 @@ const btnAtualizar = document.getElementById('btn-atualizar');
 btnTema.addEventListener('click', () => {
     // Alterna a classe 'tema-glass' no body
     document.body.classList.toggle('tema-glass');
-    
+
     // Salva a escolha para não resetar quando der F5
     const modoGlass = document.body.classList.contains('tema-glass');
     localStorage.setItem('preferencia-fundo', modoGlass ? 'glass' : 'escuro');
@@ -355,11 +361,11 @@ btnTema.addEventListener('click', () => {
 btnAtualizar.addEventListener('click', async () => {
     // Feedback visual de carregando
     btnAtualizar.innerText = "⏳...";
-    
+
     // Chama a função que você já tem para buscar o status
     await atualizarFila();
     console.log("Funcionou");
-    
+
     // Volta o texto original depois de 1 segundo
     setTimeout(() => {
         btnAtualizar.innerHTML = "🔄 <span class='texto-botao'>Atualizar Fila</span>";
