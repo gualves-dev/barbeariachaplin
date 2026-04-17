@@ -1,12 +1,8 @@
 
-
-
-
-
 body {
     /* O caminho exato que o navegador confirmou que existe */
-    background-color: #070606;
-    color: white;
+    background-color: rgb(245, 245, 245);
+    color: rgb(0, 0, 0);
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
     display: flex;
@@ -14,24 +10,20 @@ body {
     margin: 0;
 }
 
-body.tema-glass {
-    background-image: url('/assets/fundo2.png');
-    background-size: cover;
-    background-attachment: fixed;
-}
-/* No modo glass, você pode colocar um overlay escuro nos cards pra ler melhor */
-body.tema-glass .BarbeiroMenuStatusx,
-body.tema-glass .FilaMainBox,
-body.tema-glass .BarbeariaStatusMainBox
 
-{
-    background: rgba(0, 0, 0, 0.39);
-    backdrop-filter: blur(10px);
-}
 
 header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.356);
     text-align: center;
     margin-top: 10px;
+    padding: 10px;
+}
+
+header img{
+margin-top: 10px;
+width: 70px;
+height: 70px;
+border-radius: 50%;
 }
 
 button {
@@ -60,13 +52,13 @@ main {
 
     align-items: center;
     /* 1. Transparência do fundo (Branco com 5% a 10% de opacidade) */
-    background: rgba(129, 129, 129, 0.048);
+    background: rgba(255, 255, 255, 0.521);
     /* 2. O desfoque (O que dá o efeito de vidro fosco) */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     /* Suporte para Safari */
     /* 3. Borda fina e clara (Simula o corte do vidro) */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.37);
     /* 4. Arredondamento e Sombra para dar profundidade */
     border-radius: 15px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -74,7 +66,7 @@ main {
     min-width: 260px;
     margin-left: 25px;
     margin-right: 25px;
-    color: white;
+    color: rgb(0, 0, 0);
     animation: fadeInModal 0.7s ease-out forwards;
 
 }
@@ -100,14 +92,14 @@ main {
 .Legenda {
     font-size: 13px;
     font-weight: lighter;
-    color: rgba(255, 255, 255, 0.507);
+    color: rgba(0, 0, 0, 0.507);
 }
 
 .MudarStatusProfissional {
-    background-color: rgba(0, 0, 0, 0.185);
-    border: 1px solid rgba(255, 255, 255, 0.26);
-    padding: 10px 20px;
-    color: white;
+    background-color: rgb(0, 0, 0);
+    border: 1px solid rgb(255, 255, 255);
+    padding: 16px 20px;
+    color: rgb(255, 255, 255);
     display: flex;
     align-items: center;
     border-radius: 10px;
@@ -118,8 +110,8 @@ main {
 
 .MudarStatusProfissionalDisponivel {
     background-color: rgb(255, 255, 255);
-    border: 1px solid rgba(255, 255, 255, 0.26);
-    padding: 10px 20px;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 16px 20px;
     color: rgb(0, 0, 0);
     display: flex;
     align-items: center;
@@ -148,13 +140,13 @@ main {
     flex-direction: column;
     align-items: center;
     /* 1. Transparência do fundo (Branco com 5% a 10% de opacidade) */
-    background: rgba(129, 129, 129, 0.048);
+     background: rgba(255, 255, 255, 0.521);
     /* 2. O desfoque (O que dá o efeito de vidro fosco) */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     /* Suporte para Safari */
     /* 3. Borda fina e clara (Simula o corte do vidro) */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.37);
     /* 4. Arredondamento e Sombra para dar profundidade */
     border-radius: 15px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -162,7 +154,7 @@ main {
     min-width: 260px;
     margin-left: 25px;
     margin-right: 25px;
-    color: white;
+    color: rgb(0, 0, 0);
     height: auto;
     text-align: center;
      animation: fadeInModal 0.7s ease-out forwards;
@@ -193,7 +185,7 @@ h5 img {
 
 
 .FilaBox {
-    border: 1px solid rgba(255, 255, 255, 0.541);
+    border: 1px solid rgba(0, 0, 0, 0.363);
     margin-top: 10px;
     border-radius: 25px;
     width: 95%;
@@ -217,13 +209,13 @@ h5 img {
 
 .ClienteCardBox {
     /*   background: rgba(0, 0, 0, 0.466); */
-    background: rgba(0, 0, 0, 0.76);
+    background: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     margin: 10px 10px 0px;
     border-radius: 30px;
     padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.158);
+    border: 1px solid rgba(17, 2, 2, 0.856);
     animation: fadeInModal 0.7s ease-out forwards;
 
 }
@@ -236,7 +228,7 @@ h5 img {
     margin-top: 2px;
     padding: 5px;
     gap: 5px;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.541);
+    border-bottom: 1px solid rgba(8, 8, 8, 0.541);
 }
 
 .ClienteNome img {
@@ -245,7 +237,7 @@ h5 img {
 }
 
 .BoxIMG {
-    background-color: rgba(0, 0, 0, 0.568);
+    background-color: rgb(0, 0, 0);
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.322);
 }
@@ -257,7 +249,7 @@ h5 img {
     align-items: center;
     font-size: 13px;
     font-weight: lighter;
-    color: rgba(255, 255, 255, 0.507);
+    color: rgba(0, 0, 0, 0.507);
     gap: 15px;
 }
 
@@ -341,13 +333,13 @@ h5 img {
     flex-direction: column;
     align-items: center;
     /* 1. Transparência do fundo (Branco com 5% a 10% de opacidade) */
-    background: rgba(129, 129, 129, 0.048);
+    background: #ffffff;
     /* 2. O desfoque (O que dá o efeito de vidro fosco) */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     /* Suporte para Safari */
     /* 3. Borda fina e clara (Simula o corte do vidro) */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgb(0, 0, 0);
     /* 4. Arredondamento e Sombra para dar profundidade */
     border-radius: 15px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -355,7 +347,7 @@ h5 img {
     min-width: 260px;
     margin-left: 25px;
     margin-right: 25px;
-    color: white;
+    color: rgb(0, 0, 0);
         animation: fadeInModal 0.7s ease-out forwards;
 }
 
@@ -363,7 +355,7 @@ h5 img {
     font-size: 15px;
     font-weight: bolder;
     padding: 10px;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.541);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.541);
 
 
 
@@ -382,7 +374,7 @@ h5 img {
 }
 
 .FecharBarbearia {
-    background-color: rgba(0, 0, 0, 0.185);
+    background-color: rgb(0, 0, 0);
     border: 1px solid rgba(255, 255, 255, 0.26);
     padding: 10px 20px;
     color: white;
@@ -394,7 +386,7 @@ h5 img {
 
 .AbrirBarbearia {
     background-color: rgb(255, 255, 255);
-    border: 1px solid rgba(255, 255, 255, 0.26);
+    border: 1px solid rgb(0, 0, 0);
     padding: 10px 20px;
     color: rgb(0, 0, 0);
     display: flex;
@@ -445,11 +437,12 @@ footer p {
 
 .Indisponivel {
     border: 1px solid rgb(255, 0, 0);
-    box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.100);
 }
 
+
+
 .Atendendo {
-    border: 1px solid white;
+    border: 1px solid rgb(255, 255, 255);
     box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.100);
 }
 
@@ -457,6 +450,11 @@ footer p {
     box-shadow: 0 8px 32px 0 rgba(37, 37, 37, 0.048);
 }
 
+.Aberto{
+    border: 1px solid rgb(0, 0, 0);
+    box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.100);
+
+}
 #hidden {
     display: none;
 }
@@ -467,7 +465,7 @@ footer p {
 
 
 .ClienteCardBox.AtendendoAgora {
-    border: 2px solid #ffffff !important;
+    border: 3px solid orange!important;
     /* Borda Branca */
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
@@ -558,4 +556,211 @@ footer p {
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+
+
+.StatusRefeicaoBarbeiroBTN{
+display: flex;
+align-items: center;
+gap: 10px;
+background-color: rgb(119, 0, 255);
+border: none;
+margin-top: 25px;
+padding: 10px  10px;
+border-radius: 10px;
+font-weight: bolder;
+font-size: 12px;
+color: #ffffff;
+}
+
+.StatusRefeicaoBarbeiroBTN img{
+width: 40px;
+height: 40px;
+}
+
+
+
+
+.BTNQRCODELINKBOX{
+margin-top: 15px;
+padding: 10px;
+display: flex;
+gap: 15px;
+margin-bottom: 5px;
+}
+
+.BTNQrCode{
+background: none;
+border: 1px solid black;
+padding: 15px;
+border-radius: 12px;
+cursor: pointer;
+}
+
+
+.BTNCopiarLink{
+background: black;
+color: white;
+border: 1px solid black;
+padding: 15px;
+border-radius: 12px;
+cursor: pointer;
+}
+
+
+.QrCodeBox{
+margin-top: 10px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 10px;
+}
+
+.EsconderBTNLinks{
+
+background: black;
+color: white;
+padding: 17px;
+border: none;
+margin-top: 25px;
+border-radius: 12px;
+}
+
+
+.CopiarLinkBox{
+margin-top: 10px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 10px;
+
+}
+
+.links{
+display: flex;
+gap: 10px;
+align-items: center;
+border-bottom: 1px solid black;
+}
+
+.CopiarBarbeariaBTN{
+    background-color: #ffffff;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    
+}
+
+
+
+
+
+
+.card-configuracao {
+    background-color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 450px;
+    margin: 20px auto;
+    color: #000000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.config-header h3 {
+    margin: 0;
+    color: #000000;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.config-header p {
+    font-size: 12px;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    color: #000000;
+}
+
+.input-custom {
+    background: #ffffff;
+    border: 1px solid #444;
+    color: #000000;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.input-custom:focus {
+    border-color: #fff;
+}
+
+.horarios-flex {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-salvar {
+    width: 100%;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.status-info {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    padding: 10px;
+    border-top: 1px dashed #333;
+    color: #00000079; /* Verde para destacar o agendamento */
+    text-align: center;
+}
+
+
+
+.ConfiguracaoDeHorario{
+padding: 25px;
+margin-top: 25px;
+display: flex;
+align-items: center;
+gap: 10px;
+background: none;
+border: none;
+text-decoration: underline;
+font-size: 16px;
+font-weight: bolder;
+}
+
+
+.ConfiguracaoDeHorario img{
+width: 45px;
+height: 45px;
+border-radius: 50%;
+border: 1px solid white;
 }

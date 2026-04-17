@@ -2,17 +2,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+    font-family: 'Inter', sans-serif;
 }
 
 button {
     cursor: pointer;
-
 }
 
 body {
     /* O caminho exato que o navegador confirmou que existe */
-    background-color: #070606;
+    background-color: rgb(245, 245, 245);
     color: white;
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
@@ -29,22 +28,36 @@ body.tema-glass {
     background-size: cover;
     background-attachment: fixed;
 }
+
 /* No modo glass, você pode colocar um overlay escuro nos cards pra ler melhor */
 body.tema-glass .BarberInfoBox,
 body.tema-glass .ProfissionaisBox,
-body.tema-glass .FilaMainBox
-
-{
+body.tema-glass .FilaMainBox {
     background: rgba(0, 0, 0, 0.39);
     backdrop-filter: blur(10px);
 }
+
 header {
-    background-color: rgba(41, 41, 41, 0.199);
+    margin-top: 20px;
+    
+    color: #000000;
     height: auto;
-    width: auto;
+    width: 100%;
     padding: 15px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.034);
 
+}
+
+header h2 {
+    font-family: 'Pattaya', sans-serif;
+    font-size: 35px;
+    /* ajusta como quiser */
+    color: #000000;
+    /* Cor clara para fundo escuro */
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
+    /* Espessura e cor do contorno */
+    text-transform: uppercase;
+    letter-spacing: 5px;
 }
 
 
@@ -64,50 +77,67 @@ header {
 
 
 .BtnNav {
-    background-color: rgba(255, 255, 255, 0.932);
-    padding: 7px 25px;
+    position: absolute;
+    top: 60px;
+    z-index: 100;
+    right: 10px;
+    background: none;
+    padding: 20px;
     border-radius: 7px;
     border: none;
     letter-spacing: 1px;
 }
 
+.BtnNav img {
+    width: 30px;
+    height: 30px;
+}
 
-.BarberInfoBox {
+
+.BarberPoleContainer {
+    margin: 0px 25px;
+    padding: 6px; /* Grossura da borda idêntica à foto */
+    border-radius: 12px; /* Cantos levemente arredondados */
+    
+    /* Gradiente com as cores e larguras exatas da imagem */
+    background: repeating-linear-gradient(
+        -45deg,
+        #2b57cc, #2b57cc 10px,   /* Azul */
+        #ffffff 10px, #ffffff 20px,   /* Branco */
+        #cc2b2b 20px, #cc2b2b 30px,   /* Vermelho */
+        #ffffff 30px, #ffffff 40px    /* Branco */
+    );
+    
     display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin-top: 60px;
-    /* 1. Transparência do fundo (Branco com 5% a 10% de opacidade) */
-    background: rgba(129, 129, 129, 0.048);
-    /* 2. O desfoque (O que dá o efeito de vidro fosco) */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    /* Suporte para Safari */
-    /* 3. Borda fina e clara (Simula o corte do vidro) */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    /* 4. Arredondamento e Sombra para dar profundidade */
-    border-radius: 15px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    padding: 20px;
-    margin-left: 25px;
-    margin-right: 25px;
-    color: white;
-    animation: fadeInModal 0.4s ease-out forwards;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra suave igual da imagem */
+}
+
+.BordaStatusPretoEBranco{
+filter: grayscale(100%);
+
 
 }
 
+.BarberInfoBox {
+    width: 100%;
+    background-color: #ffffff; /* Fundo branco sólido como na imagem */
+    border-radius: 8px; /* Arredondamento interno um pouco menor */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .BarberInfoBox h5 {
+    font-family: 'Montserrat', serif;
     margin-top: 3px;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: bolder;
 }
 
 .BarberInfoBox img {
-    height: 130px;
-    width: 130px;
+    height: 150px;
+    width: 150px;
     border-radius: 50%;
-    border: 5px solid black;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.13));
     transition: 0.3s ease;
 
 }
@@ -121,9 +151,31 @@ header {
     font-size: 13px;
     font-weight: lighter;
     color: rgba(189, 189, 189, 0.651);
-
 }
 
+.info-fila p {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+.info-fila img {
+    border: none;
+    border-radius: 0%;
+    width: 35px;
+    height: 35px;
+}
+
+.Legenda {
+    font-size: 13px;
+
+
+}
 
 .ProfissionaisBox {
 
@@ -133,27 +185,26 @@ header {
 
     align-items: center;
     /* 1. Transparência do fundo (Branco com 5% a 10% de opacidade) */
-    background: rgba(129, 129, 129, 0.048);
+    background: rgb(255, 255, 255);
     /* 2. O desfoque (O que dá o efeito de vidro fosco) */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     /* Suporte para Safari */
     /* 3. Borda fina e clara (Simula o corte do vidro) */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.205);
     /* 4. Arredondamento e Sombra para dar profundidade */
     border-radius: 15px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     padding: 20px;
     margin-left: 25px;
     margin-right: 25px;
-    color: white;
+    color: rgb(0, 0, 0);
     animation: fadeInModal 0.7s ease-out forwards;
 
 }
 
 .Legenda {
     margin-top: 15px;
-    color: rgba(189, 189, 189, 0.651);
+    color: rgb(0, 0, 0);
 }
 
 .ProfissionaisBox h6 {
@@ -162,7 +213,7 @@ header {
     padding: 10px;
     font-size: 17px;
     font-weight: bolder;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.466);
+    border-bottom: 1px solid rgb(0, 0, 0);
 }
 
 .text1212 {
@@ -172,7 +223,44 @@ header {
     align-items: center;
 }
 
+.BtnAberturaBox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+#priceTableBox1 {
+    font-family: 'Poppins', sans-serif;
+    background: none;
+    color: rgb(0, 0, 0);
+    padding: 10px 15px;
+    border: 1px solid rgb(0, 0, 0);
+    font-size: 20px;
+    font-weight: 640;
+    border-radius: 12px;
+}
+
+#entrarNaFila1 {
+    font-family: 'Bebas Neue', sans-serif;
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    padding: 10px 15px;
+    font-size: 30px;
+    letter-spacing: 2px;
+    font-weight: bolder;
+    border: 1px solid white;
+    border-radius: 12px;
+
+
+    /* CONFIGURAÇÃO DA ANIMAÇÃO */
+    animation: pulsar 2s infinite;
+    /* Chama a animação 'pulsar', dura 2s e é infinita */
+    transition: 0.3s;
+}
+
 .ProfissionaisMainBox {
+    background-color: rgba(245, 245, 245, 0.322);
     margin-top: 20px;
     border-radius: 15px;
     padding: auto;
@@ -199,7 +287,8 @@ header {
 }
 
 .PfBoxes {
-    background-color: rgba(26, 26, 26, 0.226);
+    background-color: rgba(255, 255, 255, 0.966);
+    color: rgb(0, 0, 0);
     margin-top: 25px;
     margin-left: 10px;
     margin-right: 10px;
@@ -207,7 +296,7 @@ header {
     min-height: auto;
     padding: 5px 15px;
     border-radius: 25px;
-    border: 1px solid rgba(117, 117, 117, 0.13);
+    border: 1px solid rgb(0, 0, 0);
     position: relative;
 
 }
@@ -231,8 +320,17 @@ header {
 
 }
 
+.TextoStatusProfissional {
+    text-align: center;
+    margin-top: 5px;
+    font-weight: bolder;
+    font-size: 12px;
+
+
+}
+
 .PfBox2 {
-    border-top: 1px solid rgba(255, 255, 255, 0.089);
+    border-top: 1px solid rgba(0, 0, 0, 0.404);
     display: flex;
     flex-direction: column;
     margin-top: 7px;
@@ -247,7 +345,7 @@ header {
     margin-top: 3px;
     margin-left: 2px;
     justify-content: space-between;
-    color: rgba(189, 189, 189, 0.342);
+    color: rgb(0, 0, 0);
     font-size: 14px;
     font-weight: bolder;
 }
@@ -266,20 +364,19 @@ header {
     flex-direction: column;
     align-items: center;
     /* 1. Transparência do fundo (Branco com 5% a 10% de opacidade) */
-    background: rgba(129, 129, 129, 0.048);
+    background: rgb(255, 255, 255);
     /* 2. O desfoque (O que dá o efeito de vidro fosco) */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     /* Suporte para Safari */
     /* 3. Borda fina e clara (Simula o corte do vidro) */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.205);
     /* 4. Arredondamento e Sombra para dar profundidade */
     border-radius: 15px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     padding: 20px;
     margin-left: 25px;
     margin-right: 25px;
-    color: white;
+    color: rgb(0, 0, 0);
     text-align: center;
     animation: fadeInModal 0.4s ease-out forwards;
 
@@ -291,11 +388,7 @@ header {
     justify-content: space-around;
     margin-top: 5px;
     padding: 10px;
-    border-bottom: 1px solid white;
-
-
-
-
+    border-bottom: 1px solid rgb(0, 0, 0);
 }
 
 .FilaMainBox h5 img {
@@ -304,14 +397,14 @@ header {
 }
 
 .FilaBox {
-    background-color: rgba(0, 0, 0, 0.144);
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     margin-top: 25px;
     min-height: 250px;
     min-width: 95%;
     max-width: 95%;
-    border: 1px solid rgba(255, 255, 255, 0.082);
+    border: 1px solid rgba(0, 0, 0, 0.205);
     border-radius: 15px;
 }
 
@@ -333,16 +426,16 @@ header {
 
 #priceTableBox {
     background: none;
-    color: white;
+    color: rgb(0, 0, 0);
     padding: 10px 9px;
-    border: 1px solid white;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 12px;
-  
+
 }
 
 #entrarNaFila {
-    background: white;
-    color: rgb(0, 0, 0);
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     padding: 10px 9px;
     border: 1px solid white;
     border-radius: 12px;
@@ -426,15 +519,15 @@ footer p {
     position: absolute;
     margin-top: 30px;
     min-width: 300px;
-    top: 900px;
+    top: 150px;
     /* 1. Transparência do fundo (Branco com 5% a 10% de opacidade) */
-    background: rgba(19, 19, 19, 0.808);
+    background: rgb(255, 255, 255);
+    color: #000000;
     /* 2. O desfoque (O que dá o efeito de vidro fosco) */
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
     /* Suporte para Safari */
     /* 3. Borda fina e clara (Simula o corte do vidro) */
-    border: 1px solid rgba(255, 255, 255, 0.1);
     /* 4. Arredondamento e Sombra para dar profundidade */
     border-radius: 15px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -449,7 +542,7 @@ footer p {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid rgb(0, 0, 0);
 
 }
 
@@ -465,7 +558,7 @@ footer p {
     margin-top: 30px;
     padding: 10px;
     border-radius: 12px;
-    border: 1px solid rgba(252, 252, 252, 0.418);
+    border: 1px solid rgba(0, 0, 0, 0.37);
 }
 
 
@@ -474,13 +567,13 @@ footer p {
     flex-direction: column;
     padding: 8px;
     margin-top: 2px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.103);
+    border-bottom: 1px solid rgb(0, 0, 0);
 }
 
 .PriceBox h6 {
     font-size: 15px;
     font-weight: bolder;
-    color: white;
+    color: rgb(0, 0, 0);
 
 
 }
@@ -497,13 +590,13 @@ footer p {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     font-size: 14px;
     font-weight: bolder;
 }
 
 .PriceInfo span {
-    color: rgba(255, 255, 255, 0.247);
+    color: rgba(0, 0, 0, 0.74);
     display: flex;
     font-size: 12px;
     font-weight: lighter;
@@ -521,13 +614,13 @@ footer p {
     /* Tamanho do X */
     cursor: pointer;
     /* Vira a "mãozinha" do mouse */
-    color: rgba(255, 255, 255, 0.5);
+    color: rgb(0, 0, 0);
     /* Cor meio apagada */
     transition: 0.3s;
 }
 
 .close-btn:hover {
-    color: white;
+    color: rgb(0, 0, 0);
     /* Brilha quando passa o mouse */
 }
 
@@ -596,16 +689,16 @@ input:checked+.CardsModal img {
 .ModalFilaMainBox {
     margin-top: 300px;
     /* 1. Transparência do fundo (Branco com 5% a 10% de opacidade) */
-    background: rgba(19, 19, 19, 0.055);
+    background: rgb(255, 255, 255);
+    color: #000000;
     /* 2. O desfoque (O que dá o efeito de vidro fosco) */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     /* Suporte para Safari */
     /* 3. Borda fina e clara (Simula o corte do vidro) */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.205);
     /* 4. Arredondamento e Sombra para dar profundidade */
     border-radius: 15px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     padding: 20px;
     margin-left: 25px;
     margin-right: 25px;
@@ -620,7 +713,7 @@ input:checked+.CardsModal img {
     text-align: center;
     margin-top: 10px;
     padding: 10px;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid rgb(0, 0, 0);
     display: flex;
     justify-content: center;
     font-size: 15px;
@@ -630,8 +723,6 @@ input:checked+.CardsModal img {
 .ModalFilaMainBox img {
     width: 35px;
     height: 35px;
-
-
 }
 
 
@@ -641,7 +732,6 @@ form {
     margin: 40px auto;
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* TITULOS */
@@ -656,18 +746,18 @@ h6 {
 input[type="text"],
 input[type="tel"] {
     width: 100%;
-    background-color: rgba(39, 39, 39, 0.267);
+    background-color: rgba(255, 255, 255, 0.267);
+    border: 1px solid black;
     padding: 12px;
     border-radius: 10px;
-    border: 1px solid #dddddd54;
     margin-bottom: 15px;
     outline: none;
-    color: #ffffff;
+    color: #000000;
     transition: 0.3s;
 }
 
 input:focus {
-    border-color: #ffffff;
+    border-color: #7e7e7e;
 }
 
 /* SERVIÇOS */
@@ -690,7 +780,7 @@ input:focus {
 .TotalPrice {
     text-align: center;
     margin-top: 10px;
-    color: rgba(128, 128, 128, 0.808);
+    color: rgba(0, 0, 0, 0.808);
     font-weight: bold;
     font-size: 12px;
 }
@@ -698,14 +788,14 @@ input:focus {
 /* TOTAL */
 #totalDEServico {
     font-weight: bolder;
-    color: #ffffff;
+    color: #000000;
 }
 
 .TextoTitleSelectProfissional {
     padding: 10px;
     text-align: center;
     margin-top: 20px;
-    border-top: 1px solid white;
+    border-top: 1px solid rgb(0, 0, 0);
     font-weight: bolder;
     font-size: 15px;
 }
@@ -716,6 +806,12 @@ input:focus {
     flex-direction: column;
     gap: 20px;
     margin-top: 15px;
+}
+
+.ProfissionaisIMGBox img {
+    width: 25px;
+    height: 25px;
+
 }
 
 .SepareteBoxPF {
@@ -731,11 +827,11 @@ input[type="radio"] {
 
 /* CARD */
 .CardsModal {
-    background-color: #00000041;
+    background-color: white;
     width: 140px;
     padding: 12px;
     border-radius: 15px;
-    border: 2px solid #dddddd31;
+    border: none;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -744,11 +840,13 @@ input[type="radio"] {
 .CardsModal img {
     border-radius: 50%;
     margin-bottom: 8px;
+    width: 60px;
+    height: 60px;
 }
 
 .CardsModal h6 {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.596);
+    color: rgba(0, 0, 0, 0.596);
 }
 
 /* HOVER */
@@ -760,8 +858,9 @@ input[type="radio"] {
 /* SELECIONADO */
 input:checked+.CardsModal {
     border-color: #ffffff;
+    background-color: #000000;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 input:checked+.CardsModal h6 {
@@ -769,20 +868,20 @@ input:checked+.CardsModal h6 {
 }
 
 input:checked+.CardsModal p {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 .CardsModal p {
     font-size: 12px;
     font-weight: lighter;
-    color: rgba(255, 255, 255, 0.596);
+    color: rgba(0, 0, 0, 0.596);
 
 
 }
 
 /* SEM PREFERÊNCIA */
 #nenhum+.CardsModal {
-    border: 2px dashed #ffffff;
+    border: none;
 }
 
 
@@ -795,7 +894,7 @@ input:checked+.CardsModal p {
 
     padding: 10px;
     margin-top: 30px;
-    border-top: 1px solid white;
+    border-top: 1px solid rgb(0, 0, 0);
 
 
 }
@@ -805,13 +904,13 @@ input:checked+.CardsModal p {
 
 
 .BtnEndForms {
-    background-color: #ffffff;
+    background-color: #000000;
     border: 1px solid rgb(0, 0, 0);
     width: 100%;
     margin-top: 20px;
-    padding: 14px;
+    padding: 25px;
     border-radius: 12px;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
@@ -821,37 +920,37 @@ input:checked+.CardsModal p {
 .LoginModal {
     position: absolute;
     top: 0;
-
+    z-index: 1000;
     margin-top: 30px;
     display: flex;
     flex-direction: column;
     min-width: 300px;
     align-items: center;
     /* 1. Transparência do fundo (Branco com 5% a 10% de opacidade) */
-    background: rgba(129, 129, 129, 0.048);
+    background: rgb(255, 255, 255);
     /* 2. O desfoque (O que dá o efeito de vidro fosco) */
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(12px);
     /* Suporte para Safari */
     /* 3. Borda fina e clara (Simula o corte do vidro) */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgb(0, 0, 0);
     /* 4. Arredondamento e Sombra para dar profundidade */
     border-radius: 15px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
     margin-left: 25px;
     margin-right: 25px;
-    color: white;
+    color: rgb(0, 0, 0);
     animation: fadeInModal 0.4s ease-out forwards;
 
 
 }
 
 .LoginModal input {
-    background-color: rgb(26, 25, 25);
-    color: #ffffff;
-    border: 1px solid rgb(255, 255, 255);
-    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    border: 1px solid rgb(100, 100, 100);
+    padding: 15px;
     border-radius: 12px;
     margin-top: 10px;
 }
@@ -870,7 +969,7 @@ input:checked+.CardsModal p {
 .ForgotPass {
     padding: 15px;
     margin-top: 15px;
-    border-top: 1px solid white;
+    border-top: 1px solid rgb(44, 44, 44);
     display: flex;
     justify-content: center;
 
@@ -879,7 +978,15 @@ input:checked+.CardsModal p {
 
 .LoginModal a {
     text-decoration: underline;
-    color: white;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.LoginModal button {
+    background: none;
+    color: rgb(0, 0, 0);
     text-align: center;
     cursor: pointer;
 
@@ -903,7 +1010,7 @@ input:checked+.CardsModal p {
 
 .ClienteCardBox {
     /*   background: rgba(0, 0, 0, 0.466); */
-    background: rgba(0, 0, 0, 0.76);
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     margin: 10px 10px 0px;
@@ -915,6 +1022,7 @@ input:checked+.CardsModal p {
 }
 
 .ClienteNome {
+    color: rgb(0, 0, 0);
     display: flex;
     justify-content: center;
     font-size: 15px;
@@ -922,7 +1030,7 @@ input:checked+.CardsModal p {
     margin-top: 2px;
     padding: 5px;
     gap: 5px;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.541);
+    border-bottom: 1px solid rgba(32, 32, 32, 0.733);
     animation: fadeInModal 0.7s ease-out forwards;
 }
 
@@ -933,9 +1041,9 @@ input:checked+.CardsModal p {
 }
 
 .BoxIMG {
-    background-color: rgba(0, 0, 0, 0.568);
+    background-color: rgb(0, 0, 0);
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.322);
+    border: 1px solid rgb(0, 0, 0);
 }
 
 .ServicoCliente {
@@ -945,7 +1053,7 @@ input:checked+.CardsModal p {
     align-items: center;
     font-size: 13px;
     font-weight: lighter;
-    color: rgba(255, 255, 255, 0.507);
+    color: rgb(0, 0, 0);
     gap: 15px;
 }
 
@@ -985,7 +1093,8 @@ input:checked+.CardsModal p {
 }
 
 .botao-flutuante {
-    background-color: #000000; /* Cor neutra */
+    background-color: #000000;
+    /* Cor neutra */
     color: white;
     border: none;
     border-radius: 50px;
@@ -994,7 +1103,7 @@ input:checked+.CardsModal p {
     font-weight: bold;
     border: 1px solid white;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -1008,9 +1117,14 @@ input:checked+.CardsModal p {
 }
 
 .botao-flutuante.principal {
-    background-color: #ffffff; /* Amarelo/Dourado Barbearia */
+    background-color: #0000006c;
+    /* Amarelo/Dourado Barbearia */
     color: #ff0000;
     border: 2px solid rgb(0, 0, 0);
+}
+
+.None {
+    display: none;
 }
 
 /* Esconde o texto no celular para ficar só o ícone se a tela for pequena */
@@ -1018,6 +1132,7 @@ input:checked+.CardsModal p {
     .texto-botao {
         display: none;
     }
+
     .botao-flutuante {
         padding: 15px;
         border-radius: 50%;
@@ -1033,6 +1148,7 @@ input:checked+.CardsModal p {
         opacity: 0;
         transform: translateY(-20px) scale(0.9);
     }
+
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -1044,9 +1160,44 @@ input:checked+.CardsModal p {
         opacity: 0;
         transform: translateX(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
     }
 }
 
+
+
+/* O QUE A ANIMAÇÃO FAZ */
+@keyframes pulsar {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+    }
+
+    50% {
+        transform: scale(1.05);
+        /* Sobe um pouquinho (o efeito de pulsar) */
+        box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
+        /* Cria uma "onda" saindo do botão */
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+
+#sairDaFila {
+    padding: 12px;
+    border-radius: 8px;
+    background: none;
+    color: red;
+    border: 2px solid red;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+}

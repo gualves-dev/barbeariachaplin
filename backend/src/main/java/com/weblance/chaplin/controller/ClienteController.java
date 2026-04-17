@@ -66,4 +66,10 @@ public class ClienteController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @DeleteMapping("sair/{ID}")
+    public ResponseEntity<String> removerCliente(@PathVariable Long ID) {
+        repository.deleteById(ID);
+        return ResponseEntity.ok("Cliente Removido");
+    }
 }

@@ -1,3 +1,4 @@
+const URL_BASE =  "https://barbearia-chaplinofc-production.up.railway.app"; //"http://localhost:8080";  "https://barbearia-chaplinofc-production.up.railway.app"
 
 // Login Modal Configs
 
@@ -20,7 +21,7 @@ CloseLogin.addEventListener('click', () => {
 // Tabela De Preços Configs
 
 
-const bntPriceOpen = document.querySelector("#priceTableBox");
+const bntPriceOpen = document.querySelector("#priceTableBox1");
 const priceTableModal = document.querySelector("#priceModalTableMainBox");
 const closePriceTable = document.querySelector("#closePriceTableModal");
 
@@ -29,6 +30,7 @@ bntPriceOpen.addEventListener('click', () => {
 
     console.log("Abrir Tabela de Preço");
     priceTableModal.classList.remove("Hidden");
+    window 
 
 });
 
@@ -46,7 +48,7 @@ closePriceTable.addEventListener('click', () => {
 
 
 
-const bntEntrarNaFila = document.querySelector("#entrarNaFila");
+const bntEntrarNaFila = document.querySelector("#entrarNaFila1");
 const entrarNaFilaModal = document.querySelector(".ModalFilaMainBox");
 const closeEntrarNAFila = document.querySelector("#fecharModalEntrarNaFila");
 const bntEndFormsFilaModal = document.querySelector("#formAgendamento");
@@ -55,8 +57,25 @@ const secaoFila = document.querySelector(".FilaMainBox");
 
 
 bntEntrarNaFila.addEventListener('click', async () => {
+
+
+    // 1. Verificação de Duplicidade (LocalStorage)
+    const idClienteExistente = localStorage.getItem("ID_CLIENTE_CHAPLIN");
+
+    if (idClienteExistente) {
+        alert("Você já está na fila! Aguarde o seu atendimento. Ou Saia da fila primeiro");
+        return; // Para a execução aqui e não abre o modal
+    }
+
+
+
+
+
+
+
+
     // 1. O ideal é checar no banco no momento do clique para ter certeza
-    const response = await fetch("https://barbearia-chaplinofc-production.up.railway.app/api/status");
+    const response = await fetch(`${URL_BASE}/api/status`);
     const barbeariaAberta = await response.json();
 
     if (barbeariaAberta) {
@@ -113,7 +132,7 @@ function atualizarTotal() {
     checkboxesServico.forEach(checkbox => {
         if (checkbox.checked) {
             // Number() converte o value "45" em número para somar
-            total += Number(checkbox.value);
+            total += Number(checkbox.getAttribute("totalDinehrio"));
         }
     });
 
@@ -157,6 +176,9 @@ document.querySelector(".LoginForm").addEventListener("submit", function (e) {
 
 
 });
+
+
+
 
 
 document.addEventListener("visibilitychange", () => {

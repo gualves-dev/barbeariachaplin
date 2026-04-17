@@ -23,7 +23,6 @@ public class ProfissionalController {
         return ResponseEntity.ok(service.listarTodos());
     }
 
-
     // Muda o status para DISPONIVEL (Barbeiro ficou livre ou chegou)
     @PutMapping("/{id}/disponivel")
     public ResponseEntity<String> setDisponivel(@PathVariable Long id) {
@@ -36,6 +35,15 @@ public class ProfissionalController {
     public ResponseEntity<String> setIndisponivel(@PathVariable Long id) {
         service.indisponivelStatus(id);
         return ResponseEntity.ok("Status atualizado: Indisponível");
+    }
+
+    @PutMapping("/{id}/refeicao")
+    public ResponseEntity<Void> ficarEmRefeicao(@PathVariable Long id) {
+        // Chama o método que você criou no Service
+        service.emRefeicaoStatus(id);
+
+        // Retorna 200 OK informando que a operação foi um sucesso
+        return ResponseEntity.ok().build();
     }
 
     // Verifica se um profissional específico está aceitando clientes

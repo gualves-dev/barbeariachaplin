@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chaplin Barbearia | Fila </title>
     <link rel="stylesheet" href="css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
 
 </head>
 
@@ -14,11 +21,7 @@
     <header>
 
         <div class="Nav">
-
-            <h3>𝕮𝖍𝖆𝖕𝖑𝖎𝖓 𝕭𝖆𝖗𝖇𝖊𝖆𝖗𝖎𝖆</h3>
-
-            <button id="entrarConta" class="BtnNav">Entrar</button>
-
+            <button id="entrarConta" class="BtnNav"><img src="assets/icons8-cadeado-50.png" alt=""></button>
         </div>
 
     </header>
@@ -26,43 +29,55 @@
 
     <main>
 
-        <div class="BarberInfoBox">
 
-            <div><img src="assets/logo.png" alt="logo barber"></div>
-            <h5>🔴 FECHADO</h5>
+        <div class="BarberPoleContainer">
+            <div class="BarberInfoBox">
 
-            <div class="StatusSituacion">
-                <p>
+                <div><img src="assets/logo.png" alt="logo barber"></div>
+                <h5> FECHADO</h5>
+
+                <div class="StatusSituacion">
+                    <p>
+
+                    <div class="info-fila">
+                        <p><img src="assets/icons8-fila-100.png" alt=""> <span id="contadorFila">0</span>na fila</p>
+                    </div>
 
 
-                <p class="Legenda">
-
-
-                    🔴: Fechado <br>⚪: Aberto
-
-                    <br>Ter - Sab: 9h-19h
-                    <br>
-                    <br>*🔄 Aperte para Atualizar a Fila *
-                    <br>*🖼️ Aperte para Trocar o Fundo *
+                    <p class="Legenda">
 
 
 
-                </p>
+                    <div class="BtnAberturaBox">
+                        <button id="entrarNaFila1">Entrar Na Fila</button>
+                        <button id="priceTableBox1">Tabela De Preços</button>
+                    </div>
 
-                </p>
+
+
+
+                    </p>
+
+                    </p>
+                </div>
+
             </div>
+
+
+
+
 
         </div>
 
 
+
+
         <div class="ProfissionaisBox">
 
-            <h6><img src="assets/icons8-usuário-24.png" alt="">
-                <div class="text1212">Profissionais
-                    Disponíveis</div>
+            <h6 class="ProfissionaisIMGBox"><img src="assets/icons8-usuário-100.png" alt="">
+                <div class="text1212">Profissionais</div>
             </h6>
 
-            <p class="Legenda">🔴: Indisponivel <br>⚪: Atendendo <br>⚫: Disponivel</p>
 
             <div class="ProfissionaisMainBox">
 
@@ -80,13 +95,16 @@
                                 <img src="assets/gabriel.png" alt="gabriel">
                                 <h5>Gabriel</h5>
 
+
                             </div>
+                            <p id="textoStatusGabriel" class="TextoStatusProfissional">Livre</p>
 
                             <div class="PfBox2">
-                                <div class="NumberFila"><img src="assets/icons8-user-male-96.png" alt="">
+                                <div class="NumberFila"><img src="assets/icons8-usuário-homem-com-círculo-32.png"
+                                        alt="">
                                     <div class="NumberFila" id="filaNumberGabriel">0</div>
                                 </div>
-                                <div class="NumberFila"><img src="assets/icons8-clock-250.png" alt=""><span
+                                <div class="NumberFila"><img src="assets/icons8-relógio-30.png" alt=""><span
                                         id="gabrielStatusText"> 0
                                         min</span>
                                 </div>
@@ -104,12 +122,14 @@
                                 <h5>Pedro</h5>
 
                             </div>
+                            <p id="textoStatusPedro" class="TextoStatusProfissional">Atendendo</p>
 
                             <div class="PfBox2">
-                                <div class="NumberFila"><img src="assets/icons8-user-male-96.png" alt="">
+                                <div class="NumberFila"><img src="assets/icons8-usuário-homem-com-círculo-32.png"
+                                        alt="">
                                     <div class="NumberFila" id="filaNumberPedro">0</div>
                                 </div>
-                                <div class="NumberFila"><img src="assets/icons8-clock-250.png" alt=""><span
+                                <div class="NumberFila"><img src="assets/icons8-relógio-30.png" alt=""><span
                                         id="pedroStatusText"> 0
                                         min</span></div>
 
@@ -137,12 +157,14 @@
                                 <h5>Ramon</h5>
 
                             </div>
+                            <p id="textoStatusRamon" class="TextoStatusProfissional">Indisponivel</p>
 
                             <div class="PfBox2">
-                                <div class="NumberFila"><img src="assets/icons8-user-male-96.png" alt="">
+                                <div class="NumberFila"><img src="assets/icons8-usuário-homem-com-círculo-32.png"
+                                        alt="">
                                     <div class="NumberFila" id="filaNumberRamon">0</div>
                                 </div>
-                                <div class="NumberFila"><img src="assets/icons8-clock-250.png" alt=""><span
+                                <div class="NumberFila"><img src="assets/icons8-relógio-30.png" alt=""><span
                                         id="ramonStatusText"> 0
                                         min</span></div>
                             </div>
@@ -160,13 +182,15 @@
                                 <h5>Guilherme</h5>
 
                             </div>
+                            <p id="textoStatusGuilherme" class="TextoStatusProfissional">Em Refeiçao</p>
 
                             <div class="PfBox2">
 
-                                <div class="NumberFila"><img src="assets/icons8-user-male-96.png" alt="">
+                                <div class="NumberFila"><img src="assets/icons8-usuário-homem-com-círculo-32.png"
+                                        alt="">
                                     <div class="NumberFila" id="filaNumberGuilherme">0</div>
                                 </div>
-                                <div class="NumberFila"><img src="assets/icons8-clock-250.png" alt=""><span
+                                <div class="NumberFila"><img src="assets/icons8-relógio-30.png" alt=""><span
                                         id="guilhermeStatusText"> 0
                                         min</span></div>
 
@@ -196,7 +220,7 @@
                 <div class="text1212">Fila de Espera</div>
             </h5>
 
-            <p class="Legenda">⚪: Em atendimento <br>⚫: Aguardando <br>⏱ Tempo Medio : <span id="tempoMedioTextFila">0
+            <p class="Legenda">🟠: Em atendimento<br>⏱ Tempo Medio : <span id="tempoMedioTextFila">0
                     min</span></p>
 
 
@@ -213,12 +237,18 @@
 
             <div class="BntMainBox">
 
+                <div id="statusPosicaoCliente"
+                    style="display: none; font-family: 'Poppins', sans-serif; text-align: center; margin-bottom: 15px;">
+                    <p style="font-size: 14px; color: #555;">Sua posição atual (Fila Geral):</p>
+                    <h2 id="numeroPosicao" style="font-size: 40px; color: #000; margin: 0;">--</h2>
+                </div>
+
 
                 <div class="BntBox">
-                    <button id="priceTableBox">Ver Preços</button>
-                    <button id="entrarNaFila">Entrar Na Fila</button>
-
+                    <button id="sairDaFila" class="Hidden" onclick="desistirDaFila()">Sair da Fila</button>
                 </div>
+
+
 
             </div>
 
@@ -229,7 +259,7 @@
     <div id="priceModalTableMainBox" class="Hidden">
         <span class="close-btn" id="closePriceTableModal">&times;</span>
         <div class="PriceModalTitle">
-            <h5><img src="assets/icons8-tabela-96.png" alt="TabelaIcon">
+            <h5><img src="assets/icons8-dinheiro-32.png" alt="TabelaIcon">
                 <div class="text1212">Tabela De Preços</div>
             </h5>
         </div>
@@ -238,9 +268,9 @@
 
             <div class="PriceBox">
 
-                <h6>Corte Degradê</h6>
+                <h6>Corte</h6>
 
-                <div class="PriceInfo"><span><img src="assets/icons8-clock-250.png" alt="">
+                <div class="PriceInfo"><span><img src="assets/icons8-relógio-30.png" alt="">
                         <div class="text1212">30 min</div>
                     </span> R$ 45,00</div>
 
@@ -248,30 +278,10 @@
 
             <div class="PriceBox">
 
-                <h6>Corte e Barba</h6>
-
-                <div class="PriceInfo"><span><img src="assets/icons8-clock-250.png" alt="">
-                        <div class="text1212">45 min</div>
-                    </span> R$ 78,00</div>
-
-            </div>
-
-            <div class="PriceBox">
-
-                <h6>Corte social</h6>
-
-                <div class="PriceInfo"><span><img src="assets/icons8-clock-250.png" alt="">
-                        <div class="text1212">25 min</div>
-                    </span> R$ 40,00</div>
-
-            </div>
-
-            <div class="PriceBox">
-
                 <h6>Barba</h6>
 
-                <div class="PriceInfo"><span><img src="assets/icons8-clock-250.png" alt="">
-                        <div class="text1212">30 min</div>
+                <div class="PriceInfo"><span><img src="assets/icons8-relógio-30.png" alt="">
+                        <div class="text1212">10 min</div>
                     </span> R$ 42,00</div>
 
             </div>
@@ -280,8 +290,8 @@
 
                 <h6>Pézinho</h6>
 
-                <div class="PriceInfo"><span><img src="assets/icons8-clock-250.png" alt="">
-                        <div class="text1212">7 min</div>
+                <div class="PriceInfo"><span><img src="assets/icons8-relógio-30.png" alt="">
+                        <div class="text1212">2 min</div>
                     </span> R$ 10,00</div>
 
             </div>
@@ -290,8 +300,8 @@
 
                 <h6>Sombrancelha</h6>
 
-                <div class="PriceInfo"><span><img src="assets/icons8-clock-250.png" alt="">
-                        <div class="text1212">5 min</div>
+                <div class="PriceInfo"><span><img src="assets/icons8-relógio-30.png" alt="">
+                        <div class="text1212">2 min</div>
                     </span> R$ 5,00</div>
 
             </div>
@@ -336,23 +346,19 @@
                 <div class="ServicoCkeakBox">
 
                     <label>
-                        <input type="checkbox" name="servico" value="45"> Degradê
+                        <input type="checkbox" name="servico" value="30" totalDinehrio="45"> Corte
                     </label>
 
                     <label>
-                        <input type="checkbox" name="servico" value="40"> Social
+                        <input type="checkbox" name="servico" value="10" totalDinehrio="42"> Barba
                     </label>
 
                     <label>
-                        <input type="checkbox" name="servico" value="42"> Barba
+                        <input type="checkbox" name="servico" value="2" totalDinehrio="5"> Sobrancelha
                     </label>
 
                     <label>
-                        <input type="checkbox" name="servico" value="5"> Sobrancelha
-                    </label>
-
-                    <label>
-                        <input type="checkbox" name="servico" value="10"> Pézinho
+                        <input type="checkbox" name="servico" value="2" totalDinehrio="10"> Pézinho
                     </label>
 
                 </div>
@@ -403,9 +409,8 @@
                     <!-- SEM PREFERÊNCIA -->
                     <input type="radio" name="profissional" id="nenhum" value="nenhum">
                     <label for="nenhum" class="CardsModal">
-                        <img src="assets/icons8-usuário-24.png" alt="Sem preferência">
+                        <img src="assets/logo.png" alt="Sem preferência">
                         <h6>Sem Preferência</h6>
-                        <p>⚡ Atendimento mais rápido</p>
                     </label>
 
                 </div>
@@ -465,14 +470,14 @@
 
 
     <div class="container-botoes">
-    <button id="btn-tema" class="botao-flutuante">
-        🖼️ <span class="texto-botao">Trocar Fundo</span>
-    </button>
-    
-    <button id="btn-atualizar" class="botao-flutuante principal">
-        🔄 <span class="texto-botao">Atualizar Fila</span>
-    </button>
-</div>
+        <button id="btn-tema" class="botao-flutuante  None">
+            🖼️ <span class="texto-botao">Trocar Fundo</span>
+        </button>
+
+        <button id="btn-atualizar" class="botao-flutuante principal">
+            🔄 <span class="texto-botao">Atualizar Fila</span>
+        </button>
+    </div>
 
 
 

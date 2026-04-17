@@ -1,4 +1,5 @@
-const URL_BASE = "https://barbearia-chaplinofc-production.up.railway.app";
+const URL_BASE =  "https://barbearia-chaplinofc-production.up.railway.app"; //"http://localhost:8080";  "https://barbearia-chaplinofc-production.up.railway.app"
+
 
 
 let ID_PROFISSIONAL_LOGADO = 0;
@@ -39,7 +40,7 @@ btnIndisponivel.addEventListener('click', async () => {
 
     try {
 
-        const res = await fetch(`https://barbearia-chaplinofc-production.up.railway.app/api/profissionais/${ID_PROFISSIONAL_LOGADO}/indisponivel`, {
+        const res = await fetch(`${URL_BASE}/api/profissionais/${ID_PROFISSIONAL_LOGADO}/indisponivel`, {
             method: "PUT"
         });
 
@@ -65,7 +66,7 @@ btnDisponivel.addEventListener('click', async () => {
 
     try {
 
-        const res = await fetch(`https://barbearia-chaplinofc-production.up.railway.app/api/profissionais/${ID_PROFISSIONAL_LOGADO}/disponivel`, {
+        const res = await fetch(`${URL_BASE}/api/profissionais/${ID_PROFISSIONAL_LOGADO}/disponivel`, {
             method: "PUT"
         });
 
@@ -84,6 +85,35 @@ btnDisponivel.addEventListener('click', async () => {
 
 
 });
+
+const btnRefeicao = document.querySelector(".StatusRefeicaoBarbeiroBTN")
+btnRefeicao.addEventListener('click', async () => {
+    // 🔥 Atualiza UI
+    btnDisponivel.classList.remove("Hidden");
+    btnIndisponivel.classList.add("Hidden");
+
+    console.log("Status: Em Refeição");
+
+    try {
+        const res = await fetch(`${URL_BASE}/api/profissionais/${ID_PROFISSIONAL_LOGADO}/refeicao`, {
+            method: "PUT"
+        });
+
+        if (!res.ok) throw new Error("Erro ao mudar para status refeição");
+
+        // Feedback visual para o barbeiro
+        alert("Bom apetite! Status alterado para REFEIÇÃO. 🍽️");
+
+        // Se você tiver uma função que atualiza a tela, chame-a aqui:
+        // inicializarPainelCliente(); 
+
+    } catch (err) {
+        console.error("Erro:", err);
+        alert("Erro ao atualizar status.");
+    }
+})
+
+
 
 
 
@@ -115,22 +145,22 @@ async function atualizarFila() {
             filtrados.forEach(cliente => {
                 // --- AJUSTE AQUI: Verifica o status do banco ---
                 const estaAtendendo = cliente.status === "EM_ATENDIMENTO";
-                
+
                 // Adiciona uma classe extra se estiver atendendo para a borda branca
                 const classeCard = estaAtendendo ? "ClienteCardBox AtendendoAgora" : "ClienteCardBox";
                 const hiddenAtender = estaAtendendo ? "Hidden" : "";
                 const hiddenFinalizar = estaAtendendo ? "" : "Hidden";
 
                 htmlGerado += `
-                <div class="${classeCard}">
+                      <div class="${classeCard}">
                     <div class="ClienteNome">
                         <div class="BoxIMG"><img src="assets/icons8-usuário-24.png" alt="user png"></div>
-                        <div class="text1212">${cliente.nome}</div> </div>
-                    <div class="ServicoCliente">
-                        <span>${cliente.servico}</span>
-                        <span id="profissionalEscolhido">${cliente.profissional}</span>
-                        <span class="text1212">${cliente.tempo} min</span>
+                        <div class="text1212">${cliente.nome}</div> 
                     </div>
+                                      <div class="ServicoCliente"><span id="servicocliente">${cliente.servico}</span><span
+                                id="profissionalEscolhido">${cliente.profissional}</span> <span class="TimeBoxCliente"><span
+                                    class="CloackClienteIMG"><img src="assets/icons8-relógio-30.png" alt=""><span
+                                        class="text1212" id="tempoCliente">${cliente.tempo} min</span></span></span> </div>
                     <div class="BtnClienteGerenciamento">
                         <a id="LinkNumberCliente" href="https://wa.me/${cliente.numero}">
                             <img src="assets/logo-whatsapp-branco-png-icone-whatsapp-png-branco-11562849301ohgxjt9m7x-removebg-preview.png">
@@ -186,52 +216,54 @@ document.addEventListener('click', async (event) => {
 
 
 
-function teste(){
+function teste() {
 
 
     const boxes = {
-    gabriel: document.querySelector("#gabrielBox2"),
-    pedro: document.querySelector("#pedrobox2"),
-    ramon: document.querySelector("#ramonBox2"),
-    guilherme: document.querySelector("#guilhermeBox2")
-};
+        gabriel: document.querySelector("#gabrielBox2"),
+        pedro: document.querySelector("#pedrobox2"),
+        ramon: document.querySelector("#ramonBox2"),
+        guilherme: document.querySelector("#guilhermeBox2")
+    };
 
-fetch("https://barbearia-chaplinofc-production.up.railway.app/api/profissionais")
-    .then(res => res.json())
-    .then(lista => {
+    fetch(`${URL_BASE}/api/profissionais`)
+        .then(res => res.json())
+        .then(lista => {
 
-        lista.forEach(p => {
+            lista.forEach(p => {
 
-            const nome = (p.nome || "").toLowerCase().trim();
-            const box = boxes[nome];
+                const nome = (p.nome || "").toLowerCase().trim();
+                const box = boxes[nome];
 
-            console.log("Nome:", nome, "Status:", p.status, "Box:", box);
+                console.log("Nome:", nome, "Status:", p.status, "Box:", box);
 
-            aplicarStatus(box, p.status);
+                aplicarStatus(box, p.status);
+            });
+
+        })
+        .catch(err => {
+            console.error("Erro ao buscar profissionais:", err);
         });
 
-    })
-    .catch(err => {
-        console.error("Erro ao buscar profissionais:", err);
-    });
 
+    // 🔥 FUNÇÃO ÚNICA
+    function aplicarStatus(box, status) {
+        if (!box) return;
 
-// 🔥 FUNÇÃO ÚNICA
-function aplicarStatus(box, status) {
-    if (!box) return;
-
-    if (status === "INDISPONIVEL") {
-        btnDisponivel.classList.remove("Hidden");
-        btnIndisponivel.classList.add("Hidden");
-        box.style.border = "1px solid red";
-    } else if (status === "DISPONIVEL") {
-        btnIndisponivel.classList.remove("Hidden");
-        btnDisponivel.classList.add("Hidden");
-        box.style.border = "1px solid black";
-    } else if (status === "ATENDENDO") {
-        box.style.border = "1px solid white";
+        if (status === "INDISPONIVEL") {
+            btnDisponivel.classList.remove("Hidden");
+            btnIndisponivel.classList.add("Hidden");
+            box.style.border = "2px solid red";
+        } else if (status === "DISPONIVEL") {
+            btnIndisponivel.classList.remove("Hidden");
+            btnDisponivel.classList.add("Hidden");
+            box.style.border = "1px solid black";
+        } else if (status === "ATENDENDO") {
+            box.style.border = "2px solid orange";
+        }else{
+            box.style.border = "2px solid purple";
+        }
     }
-}
 
 
 
@@ -265,14 +297,7 @@ const btnTema = document.getElementById('btn-tema');
 const btnAtualizar = document.getElementById('btn-atualizar');
 
 // Lógica de Trocar o Plano de Fundo
-btnTema.addEventListener('click', () => {
-    // Alterna a classe 'tema-glass' no body
-    document.body.classList.toggle('tema-glass');
 
-    // Salva a escolha para não resetar quando der F5
-    const modoGlass = document.body.classList.contains('tema-glass');
-    localStorage.setItem('preferencia-fundo', modoGlass ? 'glass' : 'escuro');
-});
 
 // Lógica de Atualizar a Fila (O comando pro Railway)
 btnAtualizar.addEventListener('click', async () => {
@@ -311,4 +336,67 @@ document.addEventListener("visibilitychange", () => {
         atualizarFila();
         teste();
     }
+});
+
+
+
+
+// 1. Usamos querySelectorAll para pegar TODOS os botões da página
+const botoesVerQrCodea = document.querySelectorAll(".BTNQrCode");
+const botoesVerLinksa = document.querySelectorAll(".BTNCopiarLink");
+
+// Os modais e botões de fechar (geralmente são únicos na tela, então mantemos querySelector)
+const QrcodeBoxa = document.querySelector(".QrCodeBox");
+const LinksBoxa = document.querySelector(".CopiarLinkBox");
+const btnEsconderQrcodea = document.querySelector("#fecharQrCodeBox");
+const btnEsconderLinksa = document.querySelector("#fecharLinksBox");
+
+const btnCopiarLinkBarbeariaa = document.querySelector("#linkBarbeariaBTN");
+const btnCopiarLinkPessoala = document.querySelector("#linkPessoalBTN");
+
+// --- LÓGICA PARA OS BOTÕES DE VER QR CODE ---
+botoesVerQrCodea.forEach(btn => {
+    btn.addEventListener('click', () => {
+        console.log("Abriu QR Code");
+        QrcodeBoxa.removeAttribute("id");
+    });
+});
+
+// --- LÓGICA PARA OS BOTÕES DE VER LINKS ---
+botoesVerLinksa.forEach(btn => {
+    btn.addEventListener('click', () => {
+        console.log("Abriu Links");
+        LinksBoxa.removeAttribute("id");
+    });
+});
+
+// Os botões de fechar e copiar continuam iguais, pois o modal é um só
+btnEsconderLinksa.addEventListener('click', () => { LinksBoxa.id = "hidden"; });
+btnEsconderQrcodea.addEventListener('click', () => { QrcodeBoxa.id = "hidden"; });
+
+const linkBarbeariaa = "https://barbeariachaplin.vercel.app";
+
+
+btnCopiarLinkBarbeariaa.addEventListener('click', () =>{
+    navigator.clipboard.writeText(linkBarbeariaa).then(() => {
+        // Feedback visual para o barbeiro saber que funcionou
+        alert("Link da Barbearia copiado!");
+    }).catch(err => {
+        console.error("Erro ao copiar: ", err);
+    });
+});
+
+btnCopiarLinkPessoala.addEventListener('click', () =>{
+    console.log("clicou");
+    // Pega a URL exata que está aberta no navegador
+    const urlAtual = window.location.href;
+
+    navigator.clipboard.writeText(urlAtual).then(() => {
+        // Feedback visual (pode ser um alert ou mudar o texto do botão)
+        alert("Link da página atual copiado!");
+        console.log("URL copiada: " + urlAtual);
+    }).catch(err => {
+        console.error("Erro ao copiar link: ", err);
+        alert("Ops! Não conseguimos copiar o link automaticamente.");
+    });
 });

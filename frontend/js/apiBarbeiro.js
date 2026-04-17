@@ -1,4 +1,4 @@
-const URL_BASE = "https://barbearia-chaplinofc-production.up.railway.app";
+const URL_BASE =  "https://barbearia-chaplinofc-production.up.railway.app"; //"http://localhost:8080";  "https://barbearia-chaplinofc-production.up.railway.app"
 
 
 let ID_PROFISSIONAL_LOGADO = 0;
@@ -39,7 +39,7 @@ btnIndisponivel.addEventListener('click', async () => {
 
     try {
 
-        const res = await fetch(`https://barbearia-chaplinofc-production.up.railway.app/api/profissionais/${ID_PROFISSIONAL_LOGADO}/indisponivel`, {
+        const res = await fetch(`${URL_BASE}/api/profissionais/${ID_PROFISSIONAL_LOGADO}/indisponivel`, {
             method: "PUT"
         });
 
@@ -65,7 +65,7 @@ btnDisponivel.addEventListener('click', async () => {
 
     try {
 
-        const res = await fetch(`https://barbearia-chaplinofc-production.up.railway.app/api/profissionais/${ID_PROFISSIONAL_LOGADO}/disponivel`, {
+        const res = await fetch(`${URL_BASE}/api/profissionais/${ID_PROFISSIONAL_LOGADO}/disponivel`, {
             method: "PUT"
         });
 
@@ -85,6 +85,35 @@ btnDisponivel.addEventListener('click', async () => {
 
 });
 
+
+
+const btnRefeicao = document.querySelector(".StatusRefeicaoBarbeiroBTN")
+btnRefeicao.addEventListener('click', async () => {
+    // 🔥 Atualiza UI
+    btnDisponivel.classList.remove("Hidden");
+    btnIndisponivel.classList.add("Hidden");
+
+    console.log("Status: Em Refeição");
+
+    try {
+        const res = await fetch(`${URL_BASE}/api/profissionais/${ID_PROFISSIONAL_LOGADO}/refeicao`, {
+            method: "PUT"
+        });
+
+        if (!res.ok) throw new Error("Erro ao mudar para status refeição");
+
+        // Feedback visual para o barbeiro
+        alert("Bom apetite! Status alterado para REFEIÇÃO. 🍽️");
+
+        // Se você tiver uma função que atualiza a tela, chame-a aqui:
+        // inicializarPainelCliente(); 
+
+    } catch (err) {
+        console.error("Erro:", err);
+        alert("Erro ao atualizar status.");
+    }
+})
+
 const fecharBarbearia = document.querySelector(".FecharBarbearia");
 
 
@@ -95,7 +124,7 @@ fecharBarbearia.addEventListener('click', async () => {
 
     try {
 
-        const res = await fetch(`https://barbearia-chaplinofc-production.up.railway.app/api/status/fechar`, {
+        const res = await fetch(`${URL_BASE}/api/status/fechar`, {
             method: "POST"
         });
 
@@ -127,7 +156,7 @@ abrirBarbearia.addEventListener('click', async () => {
 
     try {
 
-        const res = await fetch(`https://barbearia-chaplinofc-production.up.railway.app/api/status/abrir`, {
+        const res = await fetch(`${URL_BASE}/api/status/abrir`, {
             method: "POST"
         });
 
@@ -138,7 +167,7 @@ abrirBarbearia.addEventListener('click', async () => {
         abrirBarbearia.classList.add("Hidden");
         fecharBarbearia.classList.remove("Hidden");
         barbeariaStatusMainBox.classList.remove("Indisponivel");
-        barbeariaStatusMainBox.classList.add("Atendendo");
+        barbeariaStatusMainBox.classList.add("Aberto");
 
         console.log("Aberta");
 
@@ -161,30 +190,26 @@ abrirBarbearia.addEventListener('click', async () => {
 
 async function atualizarFila() {
     const filaContainer = document.getElementById('filaBarbeiro');
+    // Se você não for mais filtrar pelo nome do barbeiro, 
+    // não precisa obrigatoriamente desse elemento, mas vamos mantê-lo para não bugar o resto.
     const nomeBarbeiroElem = document.querySelector('.NomeBarbeiro');
-    if (!filaContainer || !nomeBarbeiroElem) return;
-
-    const nomeBarbeiro = nomeBarbeiroElem.textContent.trim();
+    if (!filaContainer) return;
 
     try {
         const response = await fetch(`${URL_BASE}/api/clientes`);
         const clientes = await response.json();
 
-        const filtrados = clientes.filter(c => {
-            const p = (c.profissional || "").toLowerCase();
-            const alvo = nomeBarbeiro.toLowerCase();
-            return p === alvo || p === 'nenhum' || p === '';
-        });
+        // --- ALTERAÇÃO AQUI: Removemos o filtro para mostrar todos ---
+        // Se quiser manter a lógica de profissionais mas mostrar todos, 
+        // apenas garantimos que a lista 'exibirTodos' seja a 'clientes' completa.
+        const exibirTodos = clientes;
 
         let htmlGerado = "";
-        if (filtrados.length === 0) {
+        if (exibirTodos.length === 0) {
             htmlGerado = '<h6 id="textoApagavel">Sem Clientes Na Fila</h6>';
         } else {
-            filtrados.forEach(cliente => {
-                // --- AJUSTE AQUI: Verifica o status do banco ---
+            exibirTodos.forEach(cliente => {
                 const estaAtendendo = cliente.status === "EM_ATENDIMENTO";
-
-                // Adiciona uma classe extra se estiver atendendo para a borda branca
                 const classeCard = estaAtendendo ? "ClienteCardBox AtendendoAgora" : "ClienteCardBox";
                 const hiddenAtender = estaAtendendo ? "Hidden" : "";
                 const hiddenFinalizar = estaAtendendo ? "" : "Hidden";
@@ -193,12 +218,12 @@ async function atualizarFila() {
                 <div class="${classeCard}">
                     <div class="ClienteNome">
                         <div class="BoxIMG"><img src="assets/icons8-usuário-24.png" alt="user png"></div>
-                        <div class="text1212">${cliente.nome}</div> </div>
-                    <div class="ServicoCliente">
-                        <span>${cliente.servico}</span>
-                        <span id="profissionalEscolhido">${cliente.profissional}</span>
-                        <span class="text1212">${cliente.tempo} min</span>
+                        <div class="text1212">${cliente.nome}</div> 
                     </div>
+                                      <div class="ServicoCliente"><span id="servicocliente">${cliente.servico}</span><span
+                                id="profissionalEscolhido">${cliente.profissional}</span> <span class="TimeBoxCliente"><span
+                                    class="CloackClienteIMG"><img src="assets/icons8-relógio-30.png" alt=""><span
+                                        class="text1212" id="tempoCliente">${cliente.tempo} min</span></span></span> </div>
                     <div class="BtnClienteGerenciamento">
                         <a id="LinkNumberCliente" href="https://wa.me/${cliente.numero}">
                             <img src="assets/logo-whatsapp-branco-png-icone-whatsapp-png-branco-11562849301ohgxjt9m7x-removebg-preview.png">
@@ -228,7 +253,7 @@ async function atualizarFila() {
     console.log(btnIndisponível1);
     console.log(btnDisponivel1);
 
-    fetch("https://barbearia-chaplinofc-production.up.railway.app/api/profissionais")
+    fetch(`${URL_BASE}/api/profissionais`)
         .then(res => res.json())
         .then(lista => {
 
@@ -242,17 +267,22 @@ async function atualizarFila() {
 
                     // 🔴 INDISPONÍVEL
                     if (p.status === "INDISPONIVEL") {
-                        gabrielBox2.style.border = "1px solid red";
+                        gabrielBox2.style.border = "2px solid red";
                         btnIndisponível1.classList.add("Hidden"); // mostra botão
                         btnDisponivel1.classList.remove("Hidden")
 
                         // ⚫ DISPONÍVEL
                     } else if (p.status === "DISPONIVEL") {
-                        gabrielBox2.style.border = "1px solid black";
+                        gabrielBox2.style.border = "1px solid rgba(0, 0, 0, 0.37)";
 
                         // ⚪ ATENDENDO
                     } else if (p.status === "ATENDENDO") {
-                        gabrielBox2.style.border = "1px solid white";
+                        gabrielBox2.style.border = "2px solid orange";
+                    }
+                    else {
+
+                        gabrielBox2.style.border = "2px solid purple";
+
                     }
 
                 }
@@ -312,7 +342,7 @@ document.addEventListener('click', async (event) => {
 
 async function fecharBarbeariaParaGabrielLoadding() {
 
-    const statusResponseGariel = await fetch("https://barbearia-chaplinofc-production.up.railway.app/api/status");
+    const statusResponseGariel = await fetch(` ${URL_BASE}/api/status`);
     const isAbeto = await statusResponseGariel.json();
     const bordaBarbearia = document.querySelector(".BarbeariaStatusMainBox");
 
@@ -322,7 +352,7 @@ async function fecharBarbeariaParaGabrielLoadding() {
 
 
     if (isAbeto) {
-        bordaBarbearia.style.border = "1px solid white";
+        bordaBarbearia.style.border = "1px solid black";
     } else {
         btnFecharBarbearia.classList.add("Hidden");
         btnAbrirBarbearia.classList.remove("Hidden");
@@ -344,18 +374,10 @@ async function fecharBarbeariaParaGabrielLoadding() {
 
 
 
-const btnTema = document.getElementById('btn-tema');
+
 const btnAtualizar = document.getElementById('btn-atualizar');
 
-// Lógica de Trocar o Plano de Fundo
-btnTema.addEventListener('click', () => {
-    // Alterna a classe 'tema-glass' no body
-    document.body.classList.toggle('tema-glass');
 
-    // Salva a escolha para não resetar quando der F5
-    const modoGlass = document.body.classList.contains('tema-glass');
-    localStorage.setItem('preferencia-fundo', modoGlass ? 'glass' : 'escuro');
-});
 
 // Lógica de Atualizar a Fila (O comando pro Railway)
 btnAtualizar.addEventListener('click', async () => {

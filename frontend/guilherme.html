@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barbearia Chaplin Menu | ᕓ𐌄𐌁𐌋𐌀𐌍𐌂𐌄</title>
+    <title>Barbearia Chaplin | ᕓ𐌄𐌁𐌋𐌀𐌍𐌂𐌄</title>
     <link rel="stylesheet" href="css/barbeiro.css">
 </head>
 
 <body>
 
-    <header>𝕮𝖍𝖆𝖕𝖑𝖎𝖓 𝕭𝖆𝖗𝖇𝖊𝖆𝖗𝖎𝖆</header>
+    <header><img src="assets/logo.png" alt="aa"></header>
 
     <main class="BarbeiroPage">
 
         <div class="BarbeiroMenuStatus" id="guilhermeBox2">
             <img class="FotoPerfil" src="assets/guilherme.png" alt="gabriel img">
             <p class="NomeBarbeiro">Guilherme</p>
-            <p class="Legenda">🔴: Indisponivel <br>⚪: Atendendo <br>⚫: Disponivel</p>
+            <p class="Legenda">🔴: Indisponivel <br>🟠: Atendendo <br>🟣: Intervalo (Refeição)</p>
             <button class="MudarStatusProfissional"><img src="assets/icons8-desligar-50.png" alt="">
                 <div class="text1212"> Ficar Indisponivel</div>
             </button>
@@ -25,6 +25,10 @@
             <button class="MudarStatusProfissionalDisponivel Hidden"><img src="assets/icons8-shutdown-50.png" alt="">
                 <div class="text1212"> Ficar Disponivel</div>
             </button>
+
+            <button class="StatusRefeicaoBarbeiroBTN"><img src="assets/icons8-chocolate-quente-64.png" alt="">Intervalo (Refeiçao)</button>
+
+
 
         </div>
 
@@ -36,7 +40,7 @@
             </h5>
 
             <p class="Legenda">
-                ⚪:Atendendo
+                🟠:Atendendo
             </p>
 
             <div class="FilaBox">
@@ -77,6 +81,48 @@
             </div>
 
 
+            <div class="BTNQRCODELINKBOX">
+
+                <button class="BTNQrCode">
+                    Ver Qr code
+                </button>
+
+                <button class="BTNCopiarLink">
+                    Copiar Link
+                </button>
+            </div>
+
+
+
+            <div class="QrCodeBox" id="hidden">
+
+                <h5>Leia o Qr Code</h5>
+
+
+                <img src="assets/Qr Code Link Barbearia.png" alt="qr code">
+
+                <button class="EsconderBTNLinks" id="fecharQrCodeBox">Esconder</button>
+
+            </div>
+
+
+            <div class="CopiarLinkBox" id="hidden">
+
+                <h5>Copie o Link Desejado</h5>
+
+                <div class="links">
+                    <h6>Link da Barbearia</h6>
+                    <button class="CopiarBarbeariaBTN" id="linkBarbeariaBTN">Copiar</button>
+                </div>
+
+                <div class="links">
+                    <h6>Link Pessoal</h6>
+                    <button class="CopiarBarbeariaBTN" id="linkPessoalBTN">Copiar</button>
+                </div>
+                <button class="EsconderBTNLinks" id="fecharLinksBox">Esconder</button>
+            </div>
+
+
         </div>
 
     </main>
@@ -88,15 +134,12 @@
 
     </footer>
 
-        <div class="container-botoes">
-    <button id="btn-tema" class="botao-flutuante">
-        🖼️ <span class="texto-botao">Trocar Fundo</span>
-    </button>
-    
-    <button id="btn-atualizar" class="botao-flutuante principal">
-        🔄 <span class="texto-botao">Atualizar Fila</span>
-    </button>
-</div>
+    <div class="container-botoes">
+
+        <button id="btn-atualizar" class="botao-flutuante principal">
+            🔄 <span class="texto-botao">Atualizar Fila</span>
+        </button>
+    </div>
 
     <script src="js/barbeiro.js"></script>
     <script src="js/funcionarios.js"></script>

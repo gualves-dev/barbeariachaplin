@@ -29,4 +29,11 @@ public class BarbeariaStatusController {
         service.closeNow();
         return ResponseEntity.ok("Barbearia fechada com sucesso!");
     }
+
+    // No seu BarbeariaStatusController, mude esta parte:
+    @PostMapping("/force") // Remova o /api/status daqui, pois já está no topo
+    public ResponseEntity<Void> forceStatus(@RequestParam int valor) {
+        service.setComandoForcado(valor);
+        return ResponseEntity.ok().build();
+    }
 }

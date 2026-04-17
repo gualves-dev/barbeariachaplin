@@ -1,4 +1,8 @@
 -- 1. Apaga tudo para não ter erro de tabela duplicada
+
+use barbearia_chaplin;
+
+
 DROP TABLE IF EXISTS fila;
 DROP TABLE IF EXISTS profissionais;
 DROP TABLE IF EXISTS barbeariastatus;

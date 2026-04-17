@@ -63,6 +63,16 @@ public class ProfissionalService {
 
     }
 
+        public void emRefeicaoStatus(Long id) {
+
+        var profissionalStatus = repository.findById(id).orElseThrow(() -> new RuntimeException("Profissional não encontrado"));
+
+        profissionalStatus.setStatus("REFEICAO");
+
+        repository.save(profissionalStatus);
+
+    }
+
 
 
     public void verificarStatusPorNome(String nome) {
