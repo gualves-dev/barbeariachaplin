@@ -14,7 +14,9 @@
 
     <main class="BarbeiroPage">
 
-        <div class="BarbeiroMenuStatus" id="gabrielBox2">
+        <div class="BordaDiferente">
+
+                    <div class="BarbeiroMenuStatus" id="gabrielBox2">
             <img class="FotoPerfil" src="assets/gabriel.png" alt="gabriel img">
             <p class="NomeBarbeiro">Gabriel</p>
             <p class="Legenda">🔴: Indisponivel <br>🟠: Atendendo <br>🟣: Intervalo (Refeição)</p>
@@ -31,6 +33,19 @@
 
 
         </div>
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
 
 
         <div class="FilaMainBox">
@@ -135,7 +150,7 @@
             <img src="assets/logo.png" alt="">
 
             <div class="BarbeariaStatusMenu">
-                <p class="Legenda">🔴: Fechado <br>⚪: Aberto</p>
+                <p class="Legenda">🔴: Fechado</p>
                 <button class="FecharBarbearia"><img src="assets/icons8-desligar-50.png" alt="">
                     <div class="text1212"> Fechar</div>
                 </button>
@@ -147,10 +162,70 @@
 
             </div>
 
-            <button class="ConfiguracaoDeHorario"><img src="assets/icons8-sincronizar-configurações-64.png" alt="configuraçao">Configurar Horario</button>
+            <button class="ConfiguracaoDeHorario"><img src="assets/icons8-sincronizar-configurações-64.png"
+                    alt="configuraçao">Configurar Horario</button>
+
+
+
+
+            <div class="BoxSwitchesMain" id="hidden">
+
+
+                <h5>Escolha uma Configuração</h5>
+
+
+                <div class="BoxSwitches">
+                    <h5 class="BoxSwitchesS">Botao Manual <input type="checkbox" id="chk" class="Chk">
+                        <label for="chk" class="Switch">
+                            <span class="Slider"></span>
+                        </label>
+                    </h5>
+                </div>
+
+                <div class="BoxSwitches">
+                    <h5 class="BoxSwitchesS">Programar Horario <input type="checkbox" id="chk2" class="Chk">
+                        <label for="chk2" class="Switch">
+                            <span class="Slider"></span>
+                        </label>
+                    </h5>
+                </div>
+
+
+                <div class="BoxSwitches">
+                    <h5 class="BoxSwitchesS">Trava Automatica <input type="checkbox" id="chk3" class="Chk">
+                        <span>(8h30-19h30)</span>
+                        <label for="chk3" class="Switch">
+                            <span class="Slider"></span>
+                        </label>
+                        
+                    </h5>
+                    
+                </div>
+
+
+
+                <span class="close-btnx" id="closeConfigTime">&times;</span>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
 
 
             <div class="card-configuracao" id="hidden">
+
+
+
+
+
+
                 <span class="close-btn" id="closeConfTime">&times;</span>
                 <div class="config-header">
                     <i class="fas fa-clock"></i>

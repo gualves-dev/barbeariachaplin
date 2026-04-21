@@ -10,8 +10,26 @@ DROP TABLE IF EXISTS barbeariastatus;
 -- 2. Cria as tabelas do SEU jeito
 CREATE TABLE barbeariastatus (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    aberto BOOLEAN DEFAULT false
+    chave_manual BOOLEAN DEFAULT false,
+    chave_programada BOOLEAN DEFAULT false,
+    chave_automatica BOOLEAN DEFAULT true, -- Geralmente começa ligada
+    -- Dados do Botão Manual
+    aberto_manual BOOLEAN DEFAULT false,
+    -- Dados da Programação Especial (Card de horário)
+    data_programada DATE,
+    inicio_programado TIME,
+    fim_programado TIME
 );
+
+
+-- teste 
+UPDATE barbeariastatus 
+SET chave_manual = TRUE, 
+    aberto_manual = FALSE 
+WHERE id = 1;
+
+INSERT INTO barbeariastatus (chave_manual, chave_programada, chave_automatica, aberto_manual, aberto) 
+VALUES (FALSE, FALSE, TRUE, FALSE, FALSE);
 
 CREATE TABLE profissionais (
     id INT AUTO_INCREMENT PRIMARY KEY,

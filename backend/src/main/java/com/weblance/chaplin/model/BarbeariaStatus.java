@@ -1,12 +1,9 @@
 package com.weblance.chaplin.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "barbeariastatus")
@@ -17,10 +14,32 @@ public class BarbeariaStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "aberto", nullable = false) // Mapeando para a coluna 'aberto' do seu SQL
-    private boolean aberto;
+    // --- AS 3 CHAVES (SWITCHES) ---
+    
+    @Column(name = "chave_manual", nullable = false)
+    private boolean chaveManual = false;
 
-    // Se você quiser usar a coluna 'sistema_aberto' do SQL no Java, 
-    // você precisaria de outro atributo aqui. 
-    // Se não for usar, pode deixar assim.
+    @Column(name = "chave_programada", nullable = false)
+    private boolean chaveProgramada = false;
+
+    @Column(name = "chave_automatica", nullable = false)
+    private boolean chaveAutomatica = true; // Por padrão, a trava de horário vem ligada
+
+    // --- DADOS DE APOIO ---
+
+    @Column(name = "aberto_manual", nullable = false)
+    private boolean abertoManual; // O valor que o botão "Abrir/Fechar" envia
+
+    @Column(name = "data_programada")
+    private LocalDate dataProgramada; // Para o modo programado
+
+    @Column(name = "inicio_programado")
+    private LocalTime inicioProgramado;
+
+    @Column(name = "fim_programado")
+    private LocalTime fimProgramado;
+
+    // Mantendo o campo antigo por compatibilidade, se necessário
+    @Column(name = "aberto", nullable = false)
+    private boolean aberto;
 }

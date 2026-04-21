@@ -1,5 +1,6 @@
 package com.weblance.chaplin.controller;
 
+import com.weblance.chaplin.model.BarbeariaStatus;
 import com.weblance.chaplin.service.BarbeariaStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -7,33 +8,29 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/status")
-@CrossOrigin("*") // Libera para o seu Front-end acessar sem erro de CORS
+@CrossOrigin("*") 
 public class BarbeariaStatusController {
 
     @Autowired
     private BarbeariaStatusService service;
 
-    @GetMapping
-    public ResponseEntity<Boolean> IsOpen() {
+    // Retorna se a barbearia está aberta ou fechada (pro Front-end do Cliente)
+    @GetMapping("/is-open")
+    public ResponseEntity<Boolean> isOpen() {
         return ResponseEntity.ok(service.isBarbeariaOpen());
     }
 
-    @PostMapping("/abrir")
-    public ResponseEntity<String> abrir() {
-        service.openNow();
-        return ResponseEntity.ok("Barbearia aberta com sucesso!");
+    // Retorna as configurações atuais das chaves (pro Painel do Barbeiro carregar os switches)
+    @GetMapping("/config")
+    public ResponseEntity<BarbeariaStatus> getConfig() {
+        // Precisamos criar esse método no Service para buscar do banco
+        return ResponseEntity.ok(service.buscarConfiguracao());
     }
 
-    @PostMapping("/fechar")
-    public ResponseEntity<String> fechar() {
-        service.closeNow();
-        return ResponseEntity.ok("Barbearia fechada com sucesso!");
-    }
-
-    // No seu BarbeariaStatusController, mude esta parte:
-    @PostMapping("/force") // Remova o /api/status daqui, pois já está no topo
-    public ResponseEntity<Void> forceStatus(@RequestParam int valor) {
-        service.setComandoForcado(valor);
-        return ResponseEntity.ok().build();
+    // Salva todas as configurações (Switches, Datas e Horários)
+    @PutMapping("/update")
+    public ResponseEntity<String> updateConfig(@RequestBody BarbeariaStatus novaConfig) {
+        service.atualizarConfiguracao(novaConfig);
+        return ResponseEntity.ok("Configurações atualizadas com sucesso!");
     }
 }

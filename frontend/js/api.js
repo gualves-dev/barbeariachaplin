@@ -7,7 +7,7 @@ async function inicializarPainelCliente() {
     // https://barbearia-chaplinofc-production.up.railway.app
 
 
-    const statusResponse = await fetch(`${URL_BASE}/api/status`);
+    const statusResponse = await fetch(`${URL_BASE}/api/status/is-open`);
     const isAbeto = await statusResponse.json();
     const statusH5 = document.querySelector(".BarberInfoBox h5");
     const bordaBarbearia = document.querySelector(".BarberPoleContainer");

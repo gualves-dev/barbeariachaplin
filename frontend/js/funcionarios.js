@@ -214,66 +214,64 @@ document.addEventListener('click', async (event) => {
 // Início
 
 
-
-
 function teste() {
-
-
     const boxes = {
-        gabriel: document.querySelector("#gabrielBox2"),
-        pedro: document.querySelector("#pedrobox2"),
-        ramon: document.querySelector("#ramonBox2"),
-        guilherme: document.querySelector("#guilhermeBox2")
+        pedro: document.querySelector("#pedroBoxPole"),
+        ramon: document.querySelector("#ramonBoxPole"),
+        guilherme: document.querySelector("#guilhermeBoxPole")
     };
 
     fetch(`${URL_BASE}/api/profissionais`)
         .then(res => res.json())
         .then(lista => {
-
             lista.forEach(p => {
-
                 const nome = (p.nome || "").toLowerCase().trim();
                 const box = boxes[nome];
-
-                console.log("Nome:", nome, "Status:", p.status, "Box:", box);
-
-                aplicarStatus(box, p.status);
+                
+                if (box) {
+                    aplicarStatus(box, p.status);
+                }
             });
-
         })
-        .catch(err => {
-            console.error("Erro ao buscar profissionais:", err);
-        });
+        .catch(err => console.error("Erro ao buscar profissionais:", err));
 
-
-    // 🔥 FUNÇÃO ÚNICA
+    // 🔥 FUNÇÃO ÚNICA COM BORDAS ANIMADAS
     function aplicarStatus(box, status) {
         if (!box) return;
 
+        // 1. Busca os botões específicos DESTE barbeiro dentro do box dele
+        const btnIndis = box.querySelector(".MudarStatusProfissional");
+        const btnDisp = box.querySelector(".MudarStatusProfissionalDisponivel");
+
+        // 2. Limpa todas as classes de status antes de aplicar a nova
+        box.classList.remove("status-indisponivel", "status-disponivel", "status-atendendo", "status-outro");
+
+        // 3. Lógica de Status
         if (status === "INDISPONIVEL") {
-            btnDisponivel.classList.remove("Hidden");
-            btnIndisponivel.classList.add("Hidden");
-            box.style.border = "2px solid red";
+            box.classList.add("status-indisponivel");
+            if (btnDisp) btnDisp.classList.remove("Hidden");
+            if (btnIndis) btnIndis.classList.add("Hidden");
+
         } else if (status === "DISPONIVEL") {
-            btnIndisponivel.classList.remove("Hidden");
-            btnDisponivel.classList.add("Hidden");
-            box.style.border = "1px solid black";
+            box.classList.add("status-disponivel");
+            if (btnIndis) btnIndis.classList.remove("Hidden");
+            if (btnDisp) btnDisp.classList.add("Hidden");
+
         } else if (status === "ATENDENDO") {
-            box.style.border = "2px solid orange";
-        }else{
-            box.style.border = "2px solid purple";
+            box.classList.add("status-atendendo");
+            // Se estiver atendendo, geralmente escondemos os botões de mudar status
+            btnIndis.classList.add("Hidden");
+            btnDisp.classList.remove("Hidden");
+            
+            
+
+        } else {
+            // Caso seja INTERVALO / OUTRO
+            box.classList.add("status-outro");
         }
     }
-
-
-
-
-
-
-
-
-
 }
+
 
 
 

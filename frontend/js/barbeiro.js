@@ -1,7 +1,5 @@
 
 
-
-
 // BarbeiroMenuStatus 1 a 20
 
 const btnIndisponivel = document.querySelector(".MudarStatusProfissional");
@@ -102,6 +100,7 @@ const bordaBarbearia = document.querySelector(".BarbeariaStatusMainBox");
 // --- 3. Lógica de Status da Barbearia ---
 
 btnFecharBarbearia.addEventListener('click', () => {
+    alert("ATENÇAO VEREFICAR SE CHAVE MANUAL ATIVA")
     btnFecharBarbearia.classList.add('Hidden');
     btnAbrirBarbearia.classList.remove('Hidden');
     bordaBarbearia.style.border = "2px solid red";
@@ -269,112 +268,175 @@ btnCopiarLinkPessoal.addEventListener('click', () =>{
     const btnConfigTime = document.querySelector(".ConfiguracaoDeHorario");
     const btnConfigTimeClose = document.querySelector("#closeConfTime");
     const cardConfigTimeBox = document.querySelector(".card-configuracao");
+    const BoxConfig = document.querySelector(".BoxSwitchesMain");
 
 
     btnConfigTime.addEventListener('click', () =>{
-        cardConfigTimeBox.removeAttribute("id");
+       
+        BoxConfig.removeAttribute("id");
     });
 
     btnConfigTimeClose.addEventListener('click', () =>{
         cardConfigTimeBox.id = "hidden";
     });
 
+    const closeTimeCofingBox = document.querySelector("#closeConfigTime");
 
-const btnSalvar = document.getElementById('btnSalvarProgramacao');
-const statusAgendamento = document.getElementById('statusAgendamento');
-const btnCancelar = document.getElementById('btnCancelarAgendamento');
+    closeTimeCofingBox.addEventListener('click', () =>{
+        BoxConfig.id = "hidden"
 
-// --- 1. FUNÇÃO PARA FALAR COM O JAVA ---
-async function enviarComandoForcado(valor) {
+
+
+
+    }) ;
+
+
+
+
+    // --- SELEÇÃO DE ELEMENTOS ---
+const chkManual = document.getElementById('chk');        // Switch Manual
+const chkProgramado = document.getElementById('chk2');   // Switch Programado
+const chkAutomatico = document.getElementById('chk3');   // Switch Automático
+
+const btnAbrir = document.querySelector(".AbrirBarbearia");
+const btnFechar = document.querySelector(".FecharBarbearia");
+const boxMain = document.querySelector(".BarbeariaStatusMainBox");
+
+const inputData = document.getElementById('inputData');
+const inputAbre = document.getElementById('inputAbre');
+const inputFecha = document.getElementById('inputFecha');
+const statusInfo = document.getElementById('statusAgendamento');
+
+// --- 1. CARREGAR CONFIGURAÇÕES AO INICIAR ---
+async function carregarConfiguracoes() {
     try {
-        // 1. Avisa a variável de controle no Java
-        await fetch(`${URL_BASE}/api/status/force?valor=${valor}`, { method: 'POST' });
+        const res = await fetch(`${URL_BASE}/api/status/config`);
+        const config = await res.json();
 
-        // 2. Sincroniza o Banco de Dados se for abrir ou fechar
-        if (valor === 1) {
-            await fetch(`${URL_BASE}/api/status/abrir`, { method: 'POST' });
-        } else if (valor === 0) {
-            await fetch(`${URL_BASE}/api/status/fechar`, { method: 'POST' });
-        }
+        // Aplica os valores nos Switches
+        chkManual.checked = config.chaveManual;
+        chkProgramado.checked = config.chaveProgramada;
+        chkAutomatico.checked = config.chaveAutomatica;
+
+        // Aplica os valores nos Inputs de Horário
+        inputData.value = config.dataProgramada || "";
+        inputAbre.value = config.inicioProgramado ? config.inicioProgramado.substring(0, 5) : "08:30";
+        inputFecha.value = config.fimProgramado ? config.fimProgramado.substring(0, 5) : "19:30";
+
+        // Atualiza a UI (Botões abrir/fechar e cores)
+        atualizarInterfaceVisual(config.abertoManual);
+        verificarStatusNaTela(); 
         
-        console.log("Sincronizado com servidor. Valor:", valor);
-    } catch (error) {
-        console.error("Erro ao conectar com o servidor:", error);
+    } catch (err) {
+        console.error("Erro ao carregar configurações:", err);
     }
 }
 
-// --- 2. SALVAR AGENDAMENTO ---
-btnSalvar.addEventListener('click', () => {
-    const dataRef = document.getElementById('inputData').value;
-    const horaAbre = document.getElementById('inputAbre').value;
-    const horaFecha = document.getElementById('inputFecha').value;
+// --- 2. SALVAR TUDO (A FUNÇÃO MESTRE) ---
+async function salvarConfiguracao() {
+    // Montamos o objeto exatamente como o Java espera
+    const config = {
+        id: 1,
+        chaveManual: chkManual.checked,
+        chaveProgramada: chkProgramado.checked,
+        chaveAutomatica: chkAutomatico.checked,
+        abertoManual: !btnFechar.classList.contains("Hidden"), // Se o botão fechar está visível, é porque está aberto
+        dataProgramada: inputData.value || null,
+        inicioProgramado: inputAbre.value ? inputAbre.value + ":00" : null,
+        fimProgramado: inputFecha.value ? inputFecha.value + ":00" : null
+    };
 
-    if (!dataRef) return alert("Escolha uma data!");
+    try {
+        const res = await fetch(`${URL_BASE}/api/status/update`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(config)
+        });
 
-    const programacao = { data: dataRef, abertura: horaAbre, fechamento: horaFecha };
-    localStorage.setItem("PROGRAMACAO_GERENTE", JSON.stringify(programacao));
-    
-    alert("Programação salva com sucesso!");
-    verificarStatusAgendado();
-});
-
-// --- 3. CANCELAR AGENDAMENTO (VOLTAR AO AUTOMÁTICO) ---
-btnCancelar.addEventListener('click', async () => {
-    localStorage.removeItem("PROGRAMACAO_GERENTE"); // Limpa o Storage
-    
-    await enviarComandoForcado(-1); // Avisa o Java para voltar ao padrão (11:29 - 22:30)
-    await fetch(`${URL_BASE}/api/status/abrir`, { method: 'POST' });
-    alert("Agendamento cancelado! Sistema operando no automático.");
-    verificarStatusAgendado();
-});
-
-// --- 4. A REGRA DE NEGÓCIO (CORRIGIDA) ---
-function verificarStatusAgendado() {
-    const config = JSON.parse(localStorage.getItem("PROGRAMACAO_GERENTE"));
-    
-    // PEGAR DATA LOCAL CORRETA (Isso resolve o problema do dia 16/17)
-    const agora = new Date();
-    const ano = agora.getFullYear();
-    const mes = String(agora.getMonth() + 1).padStart(2, '0');
-    const dia = String(agora.getDate()).padStart(2, '0');
-    const hojeDataLocal = `${ano}-${mes}-${dia}`;
-
-    if (!config) {
-        statusAgendamento.innerHTML = "📅 Modo: <b>Automático</b> (8:29 - 19:30)";
-        statusAgendamento.style.color = "#888";
-        return;
-    }
-
-    // Compara com a data local e não com o ISOString (que é bugado)
-    if (config.data === hojeDataLocal) {
-        const agoraMinutos = agora.getHours() * 60 + agora.getMinutes();
-        const [hA, mA] = config.abertura.split(":").map(Number);
-        const [hF, mF] = config.fechamento.split(":").map(Number);
-        
-        const minAbre = (hA * 60) + mA;
-        const minFecha = (hF * 60) + mF;
-
-        if (agoraMinutos >= minAbre && agoraMinutos < minFecha) {
-            enviarComandoForcado(1); // Força abrir
-            statusAgendamento.innerHTML = `✅ Programação Ativa: Aberto até ${config.fechamento}`;
-            statusAgendamento.style.color = "#00ff00";
-        } else {
-            enviarComandoForcado(0); // Força fechar
-            statusAgendamento.innerHTML = `🚫 Programação Ativa: Fechado (Abre às ${config.abertura} ou 8h30 Amanha)`;
-            statusAgendamento.style.color = "#ff4444";
+        if (res.ok) {
+            console.log("Banco de dados atualizado!");
+            verificarStatusNaTela(); // Atualiza o texto de status
         }
+    } catch (err) {
+        console.error("Erro ao salvar:", err);
+    }
+}
+
+// --- 3. FUNÇÕES DE APOIO ---
+
+function atualizarInterfaceVisual(estaAberto) {
+    if (estaAberto) {
+        btnAbrir.classList.add("Hidden");
+        btnFechar.classList.remove("Hidden");
+        boxMain.classList.add("Atendendo");
+        boxMain.classList.remove("Indisponivel");
     } else {
-        // Se tem algo no storage mas não é para hoje, volta pro automático
-        enviarComandoForcado(-1);
-        statusAgendamento.innerHTML = `📅 Programado para ${config.data}. Hoje: <b>Automático</b>`;
-        statusAgendamento.style.color = "#888";
-
-        // Se a data já passou, limpa o storage para não lixar o navegador
-        if (config.data < hojeDataLocal) {
-            localStorage.removeItem("PROGRAMACAO_GERENTE");
-        }
+        btnAbrir.classList.remove("Hidden");
+        btnFechar.classList.add("Hidden");
+        boxMain.classList.remove("Atendendo");
+        boxMain.classList.add("Indisponivel");
     }
 }
 
-// Inicia a verificação
-window.addEventListener('load', verificarStatusAgendado);
+async function verificarStatusNaTela() {
+    // Chama o endpoint que faz o cálculo real
+    const res = await fetch(`${URL_BASE}/api/status/is-open`);
+    const abertoAgora = await res.json();
+    
+    if (abertoAgora) {
+        statusInfo.innerHTML = "✅ Barbearia operando: <b>ABERTA</b>";
+        statusInfo.style.color = "#00ff00";
+    } else {
+        statusInfo.innerHTML = "🚫 Barbearia operando: <b>FECHADA</b>";
+        statusInfo.style.color = "#ff4444";
+    }
+}
+
+// --- 4. EVENTOS (LISTENERS) ---
+
+
+const chkAutomatico2 = document.getElementById('chk2');
+
+chkAutomatico2.addEventListener('change', (event) => {
+     const BoxTimeImput = document.querySelector(".card-configuracao")
+
+    if (event.target.checked) {
+        BoxTimeImput.removeAttribute("id");
+    } else {
+        BoxTimeImput.id = "hidden";
+    }
+    
+
+});
+
+// Botão Manual Abrir
+btnAbrir.addEventListener('click', () => {
+    atualizarInterfaceVisual(true);
+    salvarConfiguracao();
+});
+
+// Botão Manual Fechar
+btnFechar.addEventListener('click', () => {
+    atualizarInterfaceVisual(false);
+    salvarConfiguracao();
+});
+
+// Ao mudar qualquer Switch, ele já salva no banco
+[chkManual, chkProgramado, chkAutomatico].forEach(el => {
+    el.addEventListener('change', salvarConfiguracao);
+});
+
+// Botão Salvar Programação de Horário
+document.getElementById('btnSalvarProgramacao').addEventListener('click', () => {
+    salvarConfiguracao();
+    alert("Programação enviada ao servidor!");
+});
+
+// Botão Cancelar (Desliga a chave programada e salva)
+document.getElementById('btnCancelarAgendamento').addEventListener('click', () => {
+    chkProgramado.checked = false;
+    salvarConfiguracao();
+});
+
+// Inicia tudo
+window.addEventListener('load', carregarConfiguracoes);

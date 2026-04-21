@@ -112,6 +112,9 @@ header h2 {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra suave igual da imagem */
 }
 
+
+
+
 .BordaStatusPretoEBranco{
 filter: grayscale(100%);
 
@@ -953,6 +956,8 @@ input:checked+.CardsModal p {
     padding: 15px;
     border-radius: 12px;
     margin-top: 10px;
+    min-width: 250px;
+    max-width: 250px;
 }
 
 .LoginModal h6 {

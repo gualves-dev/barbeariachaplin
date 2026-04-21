@@ -1,4 +1,3 @@
-
 body {
     /* O caminho exato que o navegador confirmou que existe */
     background-color: rgb(245, 245, 245);
@@ -19,11 +18,11 @@ header {
     padding: 10px;
 }
 
-header img{
-margin-top: 10px;
-width: 70px;
-height: 70px;
-border-radius: 50%;
+header img {
+    margin-top: 10px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
 }
 
 button {
@@ -46,38 +45,61 @@ main {
 
 
 .BarbeiroMenuStatus {
-    margin-top: 30px;
     display: flex;
     flex-direction: column;
-
     align-items: center;
     /* 1. Transparência do fundo (Branco com 5% a 10% de opacidade) */
-    background: rgba(255, 255, 255, 0.521);
+    background: rgb(255, 255, 255);
     /* 2. O desfoque (O que dá o efeito de vidro fosco) */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     /* Suporte para Safari */
     /* 3. Borda fina e clara (Simula o corte do vidro) */
-    border: 1px solid rgba(0, 0, 0, 0.37);
     /* 4. Arredondamento e Sombra para dar profundidade */
-    border-radius: 15px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    padding: 30px;
+    padding: 10px 29px;
     min-width: 260px;
-    margin-left: 25px;
-    margin-right: 25px;
     color: rgb(0, 0, 0);
-    animation: fadeInModal 0.7s ease-out forwards;
+    border: 1px solid rgba(0, 0, 0, 0);
+    height: auto;
+    text-align: center;
 
 }
 
+.BordaDiferente{
+    margin: 35px 25px;
+    padding: 6px; /* Grossura da borda idêntica à foto */
+    border-radius: 12px; /* Cantos levemente arredondados */
+    display: flex;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra suave igual da imagem */
+}
+
+
+/* 🔴 INDISPONÍVEL (Branco e Vermelho) */
+.status-indisponivel {
+    background: repeating-linear-gradient(-45deg, #cc2b2b, #cc2b2b 15px, #ffffff 15px, #ffffff 30px);
+    filter: grayscale(100%);
+}
+
+/* 🔵 DISPONÍVEL (Branco, Azul e Vermelho - Tradicional) */
+.status-disponivel {
+    background: repeating-linear-gradient(-45deg, #2b57cc, #2b57cc 10px, #ffffff 10px, #ffffff 20px, #cc2b2b 20px, #cc2b2b 30px, #ffffff 30px, #ffffff 40px);
+}
+
+/* 🟠 ATENDENDO (Branco e Laranja) */
+.status-atendendo {
+    background: repeating-linear-gradient(-45deg, #ff8c00, #ff8c00 15px, #ffffff 15px, #ffffff 30px);
+}
+
+/* 🟣 OUTROS / INTERVALO (Branco e Roxo) */
+.status-outro {
+    background:repeating-linear-gradient(-45deg, #8a2be2, #8a2be2 15px, #ffffff 15px, #ffffff 30px);
+}
 
 .FotoPerfil {
-    width: 200px;
-    height: 200px;
-    filter: grayscale(100%);
+    width: 150px;
+    height: 150px;
+   
     border-radius: 50%;
-    border: 1px solid black;
 }
 
 .NomeBarbeiro {
@@ -140,7 +162,7 @@ main {
     flex-direction: column;
     align-items: center;
     /* 1. Transparência do fundo (Branco com 5% a 10% de opacidade) */
-     background: rgba(255, 255, 255, 0.521);
+    background: rgba(255, 255, 255, 0.521);
     /* 2. O desfoque (O que dá o efeito de vidro fosco) */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -149,7 +171,6 @@ main {
     border: 1px solid rgba(0, 0, 0, 0.37);
     /* 4. Arredondamento e Sombra para dar profundidade */
     border-radius: 15px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     padding: 10px;
     min-width: 260px;
     margin-left: 25px;
@@ -157,7 +178,7 @@ main {
     color: rgb(0, 0, 0);
     height: auto;
     text-align: center;
-     animation: fadeInModal 0.7s ease-out forwards;
+    animation: fadeInModal 0.7s ease-out forwards;
 
 }
 
@@ -348,7 +369,7 @@ h5 img {
     margin-left: 25px;
     margin-right: 25px;
     color: rgb(0, 0, 0);
-        animation: fadeInModal 0.7s ease-out forwards;
+    animation: fadeInModal 0.7s ease-out forwards;
 }
 
 .BarbeariaStatusMainBox h5 {
@@ -450,11 +471,12 @@ footer p {
     box-shadow: 0 8px 32px 0 rgba(37, 37, 37, 0.048);
 }
 
-.Aberto{
+.Aberto {
     border: 1px solid rgb(0, 0, 0);
     box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.100);
 
 }
+
 #hidden {
     display: none;
 }
@@ -465,7 +487,7 @@ footer p {
 
 
 .ClienteCardBox.AtendendoAgora {
-    border: 3px solid orange!important;
+    border: 3px solid orange !important;
     /* Borda Branca */
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
@@ -493,7 +515,8 @@ footer p {
 }
 
 .botao-flutuante {
-    background-color: #000000; /* Cor neutra */
+    background-color: #000000;
+    /* Cor neutra */
     color: white;
     border: none;
     border-radius: 50px;
@@ -502,7 +525,7 @@ footer p {
     font-weight: bold;
     border: 1px solid white;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -516,7 +539,8 @@ footer p {
 }
 
 .botao-flutuante.principal {
-    background-color: #ffffff; /* Amarelo/Dourado Barbearia */
+    background-color: #ffffff;
+    /* Amarelo/Dourado Barbearia */
     color: #ff0000;
     border: 2px solid rgb(0, 0, 0);
 }
@@ -526,6 +550,7 @@ footer p {
     .texto-botao {
         display: none;
     }
+
     .botao-flutuante {
         padding: 15px;
         border-radius: 50%;
@@ -541,6 +566,7 @@ footer p {
         opacity: 0;
         transform: translateY(-20px) scale(0.9);
     }
+
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -552,6 +578,7 @@ footer p {
         opacity: 0;
         transform: translateX(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -560,99 +587,99 @@ footer p {
 
 
 
-.StatusRefeicaoBarbeiroBTN{
-display: flex;
-align-items: center;
-gap: 10px;
-background-color: rgb(119, 0, 255);
-border: none;
-margin-top: 25px;
-padding: 10px  10px;
-border-radius: 10px;
-font-weight: bolder;
-font-size: 12px;
-color: #ffffff;
+.StatusRefeicaoBarbeiroBTN {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(119, 0, 255);
+    border: none;
+    margin-top: 25px;
+    padding: 10px 10px;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 12px;
+    color: #ffffff;
 }
 
-.StatusRefeicaoBarbeiroBTN img{
-width: 40px;
-height: 40px;
-}
-
-
-
-
-.BTNQRCODELINKBOX{
-margin-top: 15px;
-padding: 10px;
-display: flex;
-gap: 15px;
-margin-bottom: 5px;
-}
-
-.BTNQrCode{
-background: none;
-border: 1px solid black;
-padding: 15px;
-border-radius: 12px;
-cursor: pointer;
+.StatusRefeicaoBarbeiroBTN img {
+    width: 40px;
+    height: 40px;
 }
 
 
-.BTNCopiarLink{
-background: black;
-color: white;
-border: 1px solid black;
-padding: 15px;
-border-radius: 12px;
-cursor: pointer;
+
+
+.BTNQRCODELINKBOX {
+    margin-top: 15px;
+    padding: 10px;
+    display: flex;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.BTNQrCode {
+    background: none;
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 12px;
+    cursor: pointer;
 }
 
 
-.QrCodeBox{
-margin-top: 10px;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 10px;
-}
-
-.EsconderBTNLinks{
-
-background: black;
-color: white;
-padding: 17px;
-border: none;
-margin-top: 25px;
-border-radius: 12px;
+.BTNCopiarLink {
+    background: black;
+    color: white;
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 12px;
+    cursor: pointer;
 }
 
 
-.CopiarLinkBox{
-margin-top: 10px;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 10px;
+.QrCodeBox {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.EsconderBTNLinks {
+
+    background: black;
+    color: white;
+    padding: 17px;
+    border: none;
+    margin-top: 25px;
+    border-radius: 12px;
+}
+
+
+.CopiarLinkBox {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 
 }
 
-.links{
-display: flex;
-gap: 10px;
-align-items: center;
-border-bottom: 1px solid black;
+.links {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-bottom: 1px solid black;
 }
 
-.CopiarBarbeariaBTN{
+.CopiarBarbeariaBTN {
     background-color: #ffffff;
     border: 1px solid black;
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
-    
+
 }
 
 
@@ -668,7 +695,7 @@ border-bottom: 1px solid black;
     max-width: 450px;
     margin: 20px auto;
     color: #000000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .config-header h3 {
@@ -738,29 +765,124 @@ border-bottom: 1px solid black;
     font-size: 0.85rem;
     padding: 10px;
     border-top: 1px dashed #333;
-    color: #00000079; /* Verde para destacar o agendamento */
+    color: #00000079;
+    /* Verde para destacar o agendamento */
     text-align: center;
 }
 
 
 
-.ConfiguracaoDeHorario{
-padding: 25px;
-margin-top: 25px;
-display: flex;
-align-items: center;
-gap: 10px;
-background: none;
-border: none;
-text-decoration: underline;
-font-size: 16px;
-font-weight: bolder;
+.ConfiguracaoDeHorario {
+    padding: 25px;
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    text-decoration: underline;
+    font-size: 16px;
+    font-weight: bolder;
 }
 
 
-.ConfiguracaoDeHorario img{
-width: 45px;
-height: 45px;
-border-radius: 50%;
-border: 1px solid white;
+.ConfiguracaoDeHorario img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+
+
+.Chk {
+    display: none;
+}
+
+.Switch {
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid black;
+    width: 50px;
+    height: 25px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+
+}
+
+.Slider {
+    position: absolute;
+    background-color: rgb(0, 0, 0);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    transition: all .5s ease-in-out;
+}
+
+.Chk:checked~.Switch {
+    background-color: rgb(0, 0, 0);
+
+}
+
+.Chk:checked~.Switch .Slider {
+    background-color: white;
+    transform: translateX(25px);
+}
+
+
+
+
+
+.BoxSwitchesMain {
+    border-radius: 25px;
+    width: 99%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.BoxSwitches {
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.BoxSwitchesS {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.048);
+    padding: 5px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.BoxSwitches span {
+    font-size: 12px;
+    color: #333;
+}
+
+.BoxSwitches h5 {
+    font-size: 10px;
+    min-width: 260px;
+    justify-content: space-between;
+
+}
+
+.close-btnx {
+    font-size: 40px;
+    font-weight: lighter;
+    color: rgba(0, 0, 0, 0.705);
 }

@@ -114,78 +114,6 @@ btnRefeicao.addEventListener('click', async () => {
     }
 })
 
-const fecharBarbearia = document.querySelector(".FecharBarbearia");
-
-
-fecharBarbearia.addEventListener('click', async () => {
-
-    console.log("Fechar Barbearia");
-
-
-    try {
-
-        const res = await fetch(`${URL_BASE}/api/status/fechar`, {
-            method: "POST"
-        });
-
-        if (!res.ok) throw new Error("Erro ao mudar status");
-
-        console.log("Fechar Barbearia");
-        fecharBarbearia.classList.add("Hidden");
-        abrirBarbearia.classList.remove("Hidden");
-        barbeariaStatusMainBox.classList.remove("Atendendo");
-        barbeariaStatusMainBox.classList.add("Indisponivel");
-
-        console.log("Fcehado");
-
-
-    } catch (err) {
-        console.error("Erro:", err);
-    }
-});
-
-const abrirBarbearia = document.querySelector(".AbrirBarbearia");
-
-
-
-
-abrirBarbearia.addEventListener('click', async () => {
-
-    console.log("Abrir Barbearia");
-
-
-    try {
-
-        const res = await fetch(`${URL_BASE}/api/status/abrir`, {
-            method: "POST"
-        });
-
-        if (!res.ok) throw new Error("Erro ao mudar status");
-
-
-        console.log("Abrir Barbearia");
-        abrirBarbearia.classList.add("Hidden");
-        fecharBarbearia.classList.remove("Hidden");
-        barbeariaStatusMainBox.classList.remove("Indisponivel");
-        barbeariaStatusMainBox.classList.add("Aberto");
-
-        console.log("Aberta");
-
-
-    } catch (err) {
-        console.error("Erro:", err);
-    }
-
-
-
-
-
-});
-
-
-
-
-
 
 
 async function atualizarFila() {
@@ -245,7 +173,7 @@ async function atualizarFila() {
 
 
 
-    const gabrielBox2 = document.querySelector("#gabrielBox2");
+    const gabrielBox2 = document.querySelector(".BordaDiferente");
 
     const btnIndisponível1 = document.querySelector(".MudarStatusProfissional");
     const btnDisponivel1 = document.querySelector(".MudarStatusProfissionalDisponivel")
@@ -267,22 +195,27 @@ async function atualizarFila() {
 
                     // 🔴 INDISPONÍVEL
                     if (p.status === "INDISPONIVEL") {
-                        gabrielBox2.style.border = "2px solid red";
-                        btnIndisponível1.classList.add("Hidden"); // mostra botão
-                        btnDisponivel1.classList.remove("Hidden")
+                        limparClassesStatus(gabrielBox2);
+                        gabrielBox2.classList.add("status-indisponivel");
 
-                        // ⚫ DISPONÍVEL
+                        btnIndisponível1.classList.add("Hidden");
+                        btnDisponivel1.classList.remove("Hidden");
+
                     } else if (p.status === "DISPONIVEL") {
-                        gabrielBox2.style.border = "1px solid rgba(0, 0, 0, 0.37)";
+                        limparClassesStatus(gabrielBox2);
+                        gabrielBox2.classList.add("status-disponivel");
 
-                        // ⚪ ATENDENDO
+                        btnIndisponível1.classList.remove("Hidden");
+                        btnDisponivel1.classList.add("Hidden");
+
                     } else if (p.status === "ATENDENDO") {
-                        gabrielBox2.style.border = "2px solid orange";
-                    }
-                    else {
+                        limparClassesStatus(gabrielBox2);
+                        gabrielBox2.classList.add("status-atendendo");
 
-                        gabrielBox2.style.border = "2px solid purple";
-
+                    } else {
+                        // Caso seja INTERVALO ou qualquer outro
+                        limparClassesStatus(gabrielBox2);
+                        gabrielBox2.classList.add("status-outro");
                     }
 
                 }
@@ -297,6 +230,11 @@ async function atualizarFila() {
 
 
 
+}
+
+// Função auxiliar para limpar cores de status antes de aplicar a nova
+function limparClassesStatus(elemento) {
+    elemento.classList.remove("status-indisponivel", "status-disponivel", "status-atendendo", "status-outro");
 }
 
 // ESCUTADOR DE CLIQUES (Delegação de Eventos)
@@ -334,7 +272,9 @@ document.addEventListener('click', async (event) => {
 
 
 
+const fecharBarbearia = document.querySelector(".FecharBarbearia");
 
+const abrirBarbearia = document.querySelector(".AbrirBarbearia");
 
 
 
@@ -342,7 +282,7 @@ document.addEventListener('click', async (event) => {
 
 async function fecharBarbeariaParaGabrielLoadding() {
 
-    const statusResponseGariel = await fetch(` ${URL_BASE}/api/status`);
+    const statusResponseGariel = await fetch(` ${URL_BASE}/api/status/is-open`);
     const isAbeto = await statusResponseGariel.json();
     const bordaBarbearia = document.querySelector(".BarbeariaStatusMainBox");
 
@@ -353,10 +293,14 @@ async function fecharBarbeariaParaGabrielLoadding() {
 
     if (isAbeto) {
         bordaBarbearia.style.border = "1px solid black";
+        abrirBarbearia.classList.add("Hidden");
+        fecharBarbearia.classList.remove("Hidden");
     } else {
         btnFecharBarbearia.classList.add("Hidden");
         btnAbrirBarbearia.classList.remove("Hidden");
         bordaBarbearia.style.border = "1px solid red";
+        abrirBarbearia.classList.remove("Hidden");
+        fecharBarbearia.classList.add("Hidden");
     }
 
 

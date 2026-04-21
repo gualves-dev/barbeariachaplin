@@ -75,7 +75,7 @@ bntEntrarNaFila.addEventListener('click', async () => {
 
 
     // 1. O ideal é checar no banco no momento do clique para ter certeza
-    const response = await fetch(`${URL_BASE}/api/status`);
+    const response = await fetch(`${URL_BASE}/api/status/is-open`);
     const barbeariaAberta = await response.json();
 
     if (barbeariaAberta) {
